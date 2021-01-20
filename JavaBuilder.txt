@@ -1,0 +1,2 @@
+I made a quick quick to quickly build and run Java programs. Use this format:
+./JavaBuilder.bat <file name minus the file extension>
