@@ -15,6 +15,11 @@ public class ArrayDemo {
         this.someValue = someValue;
     }
 
+    public void ArrayDeclarations() {
+        String[] cars;
+        String[] carsExplicit = {"Volvo", "BMW", "Ford", "Mazda"};
+        int[] myNum = {10, 20, 30, 40};
+    }
     // returns nothing because of void declaration
     public void learningArrays() {
         boolean dontRun = false;
