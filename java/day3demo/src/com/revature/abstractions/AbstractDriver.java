@@ -15,7 +15,7 @@ public class AbstractDriver {
         Cat myCat = new Cat();
         Cat yourCat = new Cat(8, "Sphinx", false);
         Cat hisCat = new Cat(5, "Persian", true);
-        Cat herCat = new Cat(3, "Servile", true);
+        Cat herCat = new Cat(3, "Serval", true);
 
         System.out.println("+--------------------+");
 
