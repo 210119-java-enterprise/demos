@@ -9,6 +9,10 @@ public abstract class Animals {
         System.out.println("Animal constructor called");
     }
 
+    public int getNumberOfLives(){
+        return numberOfLives;
+    }
+
     public void eat(){
         System.out.println("The animal eats...");
     }

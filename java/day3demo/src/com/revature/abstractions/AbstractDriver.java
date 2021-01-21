@@ -21,7 +21,7 @@ public class AbstractDriver {
 
         Animals someAnimal = new Cat();
         System.out.println(someAnimal.numberOfLives);// 1
-        System.out.println(((Cat) someAnimal).getNumberOfLives());
+        System.out.println(someAnimal.getNumberOfLives());//9
 
     }
 }
