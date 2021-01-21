@@ -30,12 +30,23 @@ public class ArrayDemo {
          */
 
         int[] arr = {1,3,4,5,6};//new int[5];
-        System.out.println(arr);
+        printArray(arr);
+        int i = new Integer(new Integer(3));
+        System.out.println(i);
     }
 
 
     public static void main(String[] args){
         ArrayDemo arrayDemo = new ArrayDemo();
         arrayDemo.learningArrays();
+    }
+
+    public void printArray(int[] arr){
+        for(int i=0; i<arr.length; i++){
+            System.out.println(arr[i]);
+        }
+    }
+    public void test(String x){
+
     }
 }
