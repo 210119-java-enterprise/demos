@@ -106,7 +106,7 @@ public class StringDriver {
         StringBuilder sb2 = new StringBuilder("hello");
         StringBuilder sb3 = new StringBuilder("hello");
         System.out.println(sb2 == sb3);
-        System.out.println(sb2.equals(sb3)); // false, StringBuilder/Buffer do not overide the .equals class method,
+        System.out.println(sb2.equals(sb3)); // false, StringBuilder/Buffer do not override the .equals class method,
                                                 // and the object .equals method just checks reference equality
 
         sb2.append(", world!");
