@@ -1,0 +1,2 @@
+
+Person{id=1, username='wsdf', password='password', role=TRAINER}
