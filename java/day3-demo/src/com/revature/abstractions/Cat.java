@@ -1,5 +1,9 @@
 package com.revature.abstractions;
 
+import com.revature.Driver;
+
+import java.io.Serializable;
+
 public class Cat extends Animal {
 
     // variable shadowing

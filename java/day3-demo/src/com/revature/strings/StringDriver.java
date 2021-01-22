@@ -16,7 +16,8 @@ public class StringDriver {
         String s1 = "North";
         String s2 = "North";
         String s3 = new String("North");
-        String s4 = null;
+        String s4 = null; // null essentially means the lack of an object value
+//        s4.length(); // throws a NullPointerException
 
         /*
             String Pool
