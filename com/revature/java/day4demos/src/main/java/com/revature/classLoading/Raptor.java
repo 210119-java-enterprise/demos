@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.classLoading;
 
 public class Raptor extends Bird {
     static {
