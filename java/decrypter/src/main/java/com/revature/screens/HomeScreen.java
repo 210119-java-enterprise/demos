@@ -17,11 +17,11 @@ public class HomeScreen extends Screen {
         System.out.println("2) Register");
         System.out.println("3) Exit application");
 
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader consoleReader ;
 
         try {
 
-            System.out.println("> ");
+            System.out.print("> ");
             String userSelection = consoleReader.readLine();
 
             switch (userSelection) {
@@ -33,18 +33,16 @@ public class HomeScreen extends Screen {
                     break;
                 case "3":
                     System.out.println("Exiting application");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid selection!");
 
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
     }
 
