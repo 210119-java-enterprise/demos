@@ -9,7 +9,7 @@ public class Driver {
         // throw new AuthenticationException("no reason", new NullPointerException());
 
         Pattern pattern = Pattern.compile("<.+>.*</.+>.*", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher("<h1>Nayeem loves counseling</h1><h2>hi</h2>");
+        Matcher matcher = pattern.matcher("<h1>Nayeem loves counseling</h1><h2>hi</h2>hey");
         boolean matchFound = matcher.find();
         System.out.println(matchFound);
         System.out.println(matcher.toString());
