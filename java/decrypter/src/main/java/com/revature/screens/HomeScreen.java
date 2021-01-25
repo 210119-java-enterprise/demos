@@ -1,7 +1,6 @@
 package com.revature.screens;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import static com.revature.Decrypter.app;
 
 public class HomeScreen extends Screen {
 
@@ -17,16 +16,15 @@ public class HomeScreen extends Screen {
         System.out.println("2) Register");
         System.out.println("3) Exit application");
 
-        BufferedReader consoleReader ;
-
         try {
 
             System.out.print("> ");
-            String userSelection = consoleReader.readLine();
+            String userSelection = app().getConsole().readLine();
 
             switch (userSelection) {
                 case "1":
                     System.out.println("Navigating to login screen");
+                    new LoginScreen().render();
                     break;
                 case "2":
                     System.out.println("Navigating to register screen");
@@ -42,6 +40,8 @@ public class HomeScreen extends Screen {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Shutting down application");
+            app().setAppRunning(false);
         }
 
     }
