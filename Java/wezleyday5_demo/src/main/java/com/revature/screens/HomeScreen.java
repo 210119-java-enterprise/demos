@@ -1,9 +1,6 @@
 package com.revature.screens;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLOutput;
+import static com.revature.Decrypter.*;
 
 public class HomeScreen extends Screen {
 
@@ -18,11 +15,9 @@ public class HomeScreen extends Screen {
         System.out.println("2) Register");
         System.out.println("3) Exit Application");
 
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
-
         try {
             System.out.print("> ");
-            String userSelection = consoleReader.readLine();
+            String userSelection = app().getConsole().readLine();
 
             switch (userSelection) {
                 case "1":
@@ -41,6 +36,8 @@ public class HomeScreen extends Screen {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Shutting down application");
+            app().setAppRunning(false);
         }
     }
 }
