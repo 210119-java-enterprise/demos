@@ -18,7 +18,7 @@ public class HomeScreen extends Screen {
         BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            System.out.println("> ");
+            System.out.print("> ");
             String userSelection = consoleReader.readLine();
 
             switch (userSelection) {

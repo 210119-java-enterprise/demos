@@ -11,7 +11,7 @@ public class AppUser {
     private String password;
     private UserRole userRole;
 
-    public AppUser {
+    public AppUser() {
 
     }
 
