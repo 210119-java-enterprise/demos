@@ -24,14 +24,15 @@ public class HomeScreen extends Screen {
             switch (userSelection) {
                 case "1":
                     System.out.println("Navigating to login screen");
-                    new LoginScreen().render();
+                    app().getRouter().navigate("/login");
                     break;
                 case "2":
                     System.out.println("Navigating to register screen");
+                    app().getRouter().navigate("/register");
                     break;
                 case "3":
                     System.out.println("Exiting application");
-                    System.exit(0);
+                    app().setAppRunning(false);
                     break;
                 default:
                     System.out.println("Invalid selection!");
