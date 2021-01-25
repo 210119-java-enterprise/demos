@@ -1,0 +1,2 @@
+
+Person{id=0, username='alexgooge', password='password', role=TRAINER}
