@@ -1,9 +1,20 @@
 package com.revature;
 
+import com.revature.screens.HomeScreen;
+import com.revature.util.AppState;
+
 public class Decrypter {
 
-    public static void main(String[] args) {
+    private static AppState app = new AppState();
 
+    public static void main(String[] args) {
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.render();
+    }
+
+    //method to get the application?
+    public static AppState app() {
+        return app;
     }
 
 }

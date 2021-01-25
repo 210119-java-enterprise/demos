@@ -3,6 +3,8 @@ package com.revature.screens;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import static com.revature.Decrypter.app;
+
 public class HomeScreen extends Screen {
 
     public HomeScreen() {
@@ -12,14 +14,14 @@ public class HomeScreen extends Screen {
     @Override
     public void render() {
         System.out.println("Welcome to Decrypter BY ERIC\n");
-        System.out.println("1) login");
-        System.out.println("2) login");
+        System.out.println("1) Login");
+        System.out.println("2) Registration");
         System.out.println("3) Exit application");
 
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+
         try {
             System.out.println("> ");
-            String userSelection = consoleReader.readLine();
+            String userSelection = app().getConsole().readLine();
             switch (userSelection) {
                 case "1":
                     System.out.println("Navigating to login screen");
@@ -34,7 +36,10 @@ public class HomeScreen extends Screen {
                     System.out.println("Invalid Exception");
             }
         } catch (Exception e) {
+            //exception here likely means console closed
             e.printStackTrace();
+            System.err.println("Shutting down application");
+            app().setAppRunning(false);
         }
 
     }
