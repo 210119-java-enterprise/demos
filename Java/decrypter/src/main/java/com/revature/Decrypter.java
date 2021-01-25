@@ -8,10 +8,11 @@ public class Decrypter {
     private static AppState app = new AppState();
 
     public static void main(String[] args) {
-        System.out.println(app.isAppRunning());
-        HomeScreen homeScreen = new HomeScreen();
-        homeScreen.render();
-        System.out.println(app.isAppRunning());
+
+        while (app.isAppRunning()) {
+            app.get();
+        }
+
     }
 
     public static AppState app() {

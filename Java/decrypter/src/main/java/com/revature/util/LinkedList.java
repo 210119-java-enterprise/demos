@@ -8,31 +8,62 @@ public class LinkedList<T> {
 
     // Adds to tail
     public void insert(T data) {
-        Node<T> node = new Node<>(data, tail, null);
-        tail.prevNode = node;
-        tail = node;
+        Node<T> node = new Node<>(data, null, null);
+        if (head == null) {
+            tail = head = node;
+        } else {
+            tail.nextNode = node;
+            node.prevNode = tail;
+            tail = node;
+        }
         size++;
     }
 
-    public T getFirst() {
-        return head.data;
+    public T findFirst(T data) {
+        if (data == null) {
+            return null;
+        }
+
+        for (Node<T> currentNode = head; currentNode != null; currentNode = currentNode.nextNode){
+            if (currentNode.data.equals(data)) {
+                return null;
+            }
+        }
+
+        return null;
     }
 
-    public void deleteFirst() {
-        Node<T> newHead = head.prevNode;
-        newHead.nextNode = null;
-        head = newHead;
+    public T pop() {
+
+        if (head==null) {
+            return null;
+        }
+
+        T data = head.data;
+
+        head = head.nextNode;
+        head.prevNode = null;
+
         size--;
+
+        return data;
+    }
+
+    public T peek() {
+        return (head == null)? null : head.data;
     }
 
     public boolean contains(T data) {
-        Node<T> currentNode = head;
-        for (int i  = 1; i < size(); i++) {
-            if (currentNode.data == data) {
+        if (data == null) {
+            return false;
+        }
+
+        for (Node<T> currentNode = head; currentNode != null; currentNode = currentNode.nextNode){
+            if (currentNode.data.equals(data)) {
                 return true;
             }
-            currentNode = head.nextNode;
         }
+
         return false;
     }
 
@@ -41,7 +72,9 @@ public class LinkedList<T> {
     }
 
     public void printList() {
-
+        for (Node<T> currentNode = head; currentNode != null; currentNode = currentNode.nextNode){
+            System.out.println(currentNode.data);
+        }
     }
 
     private static class Node<T> {
