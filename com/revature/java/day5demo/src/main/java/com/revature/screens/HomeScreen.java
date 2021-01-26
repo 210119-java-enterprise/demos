@@ -3,7 +3,7 @@ package com.revature.screens;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import static com.revature.Decrypter.*;
+import static com.revature.Decrypter.app;
 
 public class HomeScreen extends Screen {
 
@@ -36,6 +36,7 @@ public class HomeScreen extends Screen {
                     break;
                 case "3":
                     System.out.println("Exiting application...\n");
+                    app().setAppRunning(false);
                     break;
                 default:
                     System.out.println("Invalid selection: please enter a number 1-3.\n");

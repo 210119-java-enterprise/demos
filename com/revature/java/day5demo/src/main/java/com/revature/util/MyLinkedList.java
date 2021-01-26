@@ -70,8 +70,12 @@ public class MyLinkedList<T> {
             return null;
         }
         T temp = head.data;
-        head = head.myNext;
-        head.myPrevious = null;
+        if (size > 1) {
+            head = head.myNext;
+            head.myPrevious = null;
+        } else {
+            head = tail = null;
+        }
         size--;
         return temp;
     }
@@ -85,8 +89,12 @@ public class MyLinkedList<T> {
             return null;
         }
         T temp = tail.data;
-        tail = tail.myPrevious;
-        tail.myNext = null;
+        if (size > 1) {
+            tail = tail.myPrevious;
+            tail.myNext = null;
+        } else {
+            head = tail = null;
+        }
         size--;
         return temp;
     }
@@ -109,21 +117,6 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    public T findFirst(T data) {
-        if (head == null || data == null) {
-            return null;
-        }
-        Node<T> currentNode = head;
-        while(currentNode != null) {
-            if (currentNode.data.equals(data)) {
-                return currentNode.data;
-            } else {
-                currentNode = currentNode.myNext;
-            }
-        }
-        return null;
-    }
-
     /*
         Returns the size of the array
     */
@@ -138,6 +131,7 @@ public class MyLinkedList<T> {
         Node<T> currentNode = head;
         while(currentNode != null) {
             System.out.println(currentNode.data + "\t");
+            currentNode = currentNode.myNext;
         }
         System.out.println();
     }
