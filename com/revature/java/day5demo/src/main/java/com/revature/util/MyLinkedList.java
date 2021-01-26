@@ -26,15 +26,18 @@ public class MyLinkedList<T> {
 
     /*
         Adds a node with the given data onto the list
+        Does not accept null items
     */
     public void append(T data) {
+        if (data == null) {
+            return;
+        }
         Node<T> newTail;
         if (size == 0) {
             newTail = new Node<T>(data, null, null);
             head = newTail;
         } else {
             newTail = new Node<T>(data);
-            newTail.myNext = null;
             newTail.myPrevious = tail;
             tail.myNext = newTail;
         }
@@ -44,33 +47,55 @@ public class MyLinkedList<T> {
 
     /*
         Returns the data of the first Node in the list
+        Returns null if the list is empty
     */
-    public T getFirst() {
-        return head.data;
+    public T peek() {
+        return head == null? null: head.data;
+    }
+
+    /*
+        Returns the data of the last Node in the list
+        Returns null if the list is empty
+    */
+    public T peekLast() {
+        return tail == null? null: tail.data;
     }
 
     /*
         Deletes the first element in the list
+        Returns the data from deleted element or null if list is empty
     */
-    public void deleteFirst() {
+    public T pop() {
+        if (head == null) {
+            return null;
+        }
+        T temp = head.data;
         head = head.myNext;
+        head.myPrevious = null;
         size--;
+        return temp;
     }
 
     /*
         Deletes the last element in the list
+        Returns the data from deleted element or null if list is empty
     */
-    public void deleteLast() {
+    public T popLast() {
+        if (head == null) {
+            return null;
+        }
+        T temp = tail.data;
         tail = tail.myPrevious;
         tail.myNext = null;
         size--;
+        return temp;
     }
 
     /*
         Searches for a Node containing data and returns whether the Node exists
     */
     public Boolean contains(T data) {
-        if (head == null) {
+        if (head == null || data == null) {
             return false;
         }
         Node<T> currentNode = head;
@@ -84,6 +109,24 @@ public class MyLinkedList<T> {
         return false;
     }
 
+    public T findFirst(T data) {
+        if (head == null || data == null) {
+            return null;
+        }
+        Node<T> currentNode = head;
+        while(currentNode != null) {
+            if (currentNode.data.equals(data)) {
+                return currentNode.data;
+            } else {
+                currentNode = currentNode.myNext;
+            }
+        }
+        return null;
+    }
+
+    /*
+        Returns the size of the array
+    */
     public int size() {
         return size;
     }
@@ -105,6 +148,9 @@ public class MyLinkedList<T> {
         Returns false is no node was deleted
     */
     public Boolean remove(T data) {
+        if (data == null) {
+            return false;
+        }
         Node<T> currentNode = head;
         while(currentNode != null) {
             if (currentNode.data.equals(data)) {

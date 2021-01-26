@@ -90,52 +90,21 @@ public class AppUser {
     @Override
     public int hashCode() {
         return Objects.hash(id, fName, lName, username, password, userRole);
-        // final int prime = 31;
-        // int result = 1;
-        // result = prime * result + ((fName == null) ? 0 : fName.hashCode());
-        // result = prime * result + id;
-        // result = prime * result + ((lName == null) ? 0 : lName.hashCode());
-        // result = prime * result + ((password == null) ? 0 : password.hashCode());
-        // result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
-        // result = prime * result + ((username == null) ? 0 : username.hashCode());
-        // return result;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
+        if (obj == null || getClass() != obj.getClass())
             return false;
         AppUser other = (AppUser) obj;
-        if (fName == null) {
-            if (other.fName != null)
-                return false;
-        } else if (!fName.equals(other.fName))
-            return false;
-        if (id != other.id)
-            return false;
-        if (lName == null) {
-            if (other.lName != null)
-                return false;
-        } else if (!lName.equals(other.lName))
-            return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
-        if (userRole != other.userRole)
-            return false;
-        if (username == null) {
-            if (other.username != null)
-                return false;
-        } else if (!username.equals(other.username))
-            return false;
-        return true;
-
+        return id == other.id &&
+            Objects.equals(fName, other.fName) &&
+            Objects.equals(lName, other.lName) &&
+            Objects.equals(username, other.username) &&
+            Objects.equals(password, other.password) &&
+            userRole == other.userRole;
     }
 
     

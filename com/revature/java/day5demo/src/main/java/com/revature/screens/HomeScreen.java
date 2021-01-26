@@ -28,9 +28,11 @@ public class HomeScreen extends Screen {
                     System.out.println("Navigating to login screen...\n");
                     // Can do, but creates a new screen each time :(
                     // new LoginScreen().render();
+                    app().getRouter().navigate("/login");
                     break;
                 case "2":
                     System.out.println("Navigating to registration screen...\n");
+                    app().getRouter().navigate("/registration");
                     break;
                 case "3":
                     System.out.println("Exiting application...\n");
