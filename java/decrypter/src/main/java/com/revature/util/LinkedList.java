@@ -1,6 +1,8 @@
 package com.revature.util;
 
-public class LinkedList<T> {
+import com.revature.models.AppUser;
+
+public class LinkedList<T extends AppUser> {
 
     private int size;
     private Node<T> head;
