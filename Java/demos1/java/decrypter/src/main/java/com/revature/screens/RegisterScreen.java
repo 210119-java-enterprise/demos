@@ -1,5 +1,8 @@
 package com.revature.screens;
 
+
+import static com.revature.Decrypter.app;
+
 public class RegisterScreen extends Screen {
 
 
@@ -9,7 +12,19 @@ public class RegisterScreen extends Screen {
 
     @Override
     public void render() {
-        System.out.println("RegisterScreen works");
+
+        String firstName;
+        String lastName;
+        String userName;
+        String passWord;
+
+        System.out.println("Sign up for a new account!");
+        System.out.println("First name: ");
+        firstName = app().getConsole().readLine();
+
+
     }
+
+
 
 }
