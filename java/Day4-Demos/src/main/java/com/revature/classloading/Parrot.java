@@ -1,4 +1,4 @@
-package classloading;
+package com.revature.classloading;
 
 public class Parrot {
     static {
