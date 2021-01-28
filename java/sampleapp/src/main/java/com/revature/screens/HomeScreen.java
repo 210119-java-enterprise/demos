@@ -39,7 +39,7 @@ public class HomeScreen extends Screen{
             }
         }catch(Exception e){
             e.printStackTrace();
-            System.out.println("Shutting down application");
+            System.out.println("Shutting down application due to error");
             app().setAppRunning(false);
         }
     }
