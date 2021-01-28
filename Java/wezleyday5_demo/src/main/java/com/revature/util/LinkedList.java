@@ -45,8 +45,10 @@ public class LinkedList<T> {
 
         T popped = head.data;
         head = head.nextNode;
-        head.prevNode = null;
 
+        if(head != null) {
+            head.prevNode = null;
+        }
         size--;
 
         return popped;
