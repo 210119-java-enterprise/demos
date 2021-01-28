@@ -11,32 +11,54 @@ public class Map<K, V> {
     private Entry<K, V>[] entries = new Entry[DEFAULT_CAPACITY];
 
     public boolean containsKey(K key) {
+        for (int i = 0; i < size; i++) {
+            if (entries[i].key == null) {
+                if (entries[i].key == key) {
+                    return true;
+                }
+            } else if (entries[i].key.equals(key)) {
+                return true;
+            }
+        }
+
         return false;
+    }
+
+    public LinkedList<K> keyList() {
+        LinkedList<K> keyList = new LinkedList<>();
+        for (int i = 0; i < size; i++) {
+            keyList.insert(entries[i].key);
+        }
+        return keyList;
     }
 
     public V get(K key) {
         for (int i = 0; i < size; i++) {
 
-                if (entries[i].key == null) {
-                    if (entries[i].key == key) {
-                        return entries[i].value;
-                    }
-                }
-
-                if (entries[i].key.equals(key)) {
+            if (entries[i].key == null) {
+                if (entries[i].key == key) {
                     return entries[i].value;
                 }
+            } else if (entries[i].key.equals(key)) {
+                return entries[i].value;
+            }
 
         }
         return null;
     }
 
-    public V getOrDefault(K key, V value) {
-        return null;
+    public V getOrDefault(K key, V defaultValue) {
+
+        if (!containsKey(key)) {
+            return defaultValue;
+        }
+
+        return get(key);
+
     }
 
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     /**
@@ -54,12 +76,21 @@ public class Map<K, V> {
 
         boolean wasInserted = true;
         for (int i = 0; i < size; i++) {
-            if (entries[i].key.equals(key)) {
+
+            if (entries[i].key == null) {
+                if (entries[i].key == key) {
+                    previousValue = entries[i].value;
+                    entries[i].value = value;
+                    wasInserted = false;
+                    break;
+                }
+            } else if (entries[i].key.equals(key)) {
                 previousValue = entries[i].value;
                 entries[i].value = value;
                 wasInserted = false;
                 break;
             }
+
         }
 
         if (wasInserted) {
@@ -72,6 +103,25 @@ public class Map<K, V> {
     }
 
     public void remove(K key) {
+
+        boolean wasRemoved = false;
+        for (int i = 0; i < size; i++) {
+            if (entries[i].key == null) {
+                if (entries[i].key == key) {
+                    entries[i] = entries[size - 1];
+                    size--;
+                    wasRemoved = true;
+                }
+            } else if (entries[i].key.equals(key)) {
+                entries[i] = entries[size - 1];
+                size--;
+                wasRemoved = true;
+            }
+        }
+
+        if (wasRemoved) {
+            condenseArray();
+        }
 
     }
 
@@ -87,8 +137,10 @@ public class Map<K, V> {
     }
 
     // this method will be helpful after removing a key from the map
-    private void condenseArray(int start) {
-
+    private void condenseArray() {
+        if (size * 2 < entries.length) {
+            entries = Arrays.copyOf(entries, entries.length / 2);
+        }
     }
 
     private static class Entry<K, V> {
