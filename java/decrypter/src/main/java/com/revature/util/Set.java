@@ -36,7 +36,7 @@ public class Set<T> {
     public T[] toArray(Class<T> clazz) {
         LinkedList<T> keys = this.map.keyList();
         T[] keyArr = (T[]) Array.newInstance(clazz, size());
-        for (int i = 0; i < keys.size(); i++) {
+        for (int i = 0; i < size(); i++) {
             T t = keys.pop();
             keyArr[i] = t;
         }
