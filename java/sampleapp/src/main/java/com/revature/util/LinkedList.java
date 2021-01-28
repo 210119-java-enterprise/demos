@@ -10,28 +10,27 @@ public class LinkedList<T> {
         if(data == null){
             return;
         }
-        if(head == null){
-            Node newNode = new Node<T>(data);
-            head = newNode;
-            head.nextNode = null;
-            tail = newNode;
-            tail.previousNode = null;
-        } else{
-            Node newNode = new Node<T>(data,null,tail);
+
+        Node<T> newNode = new Node<>(data);
+        if (head == null) {
+            tail = head = newNode;
+        } else {
             tail.nextNode = newNode;
+            newNode.previousNode = tail;
             tail = newNode;
         }
         size++;
     }
 
     public T pop(){
+
         if(head == null){
             return null;
         }
 
         T popped = head.data;
-        head = head.nextNode;
         head.previousNode = null;
+        head = head.nextNode;
         size--;
 
         return popped;
