@@ -10,9 +10,12 @@ public class Decrypter {
     public static void main(String[] args) {
 //        HomeScreen homeScreen = new HomeScreen();
 //        homeScreen.render();
-        while(app.isAppRunning()){
 
-        }
+        
+
+//        while(app.isAppRunning()){
+//            app.getRouter().navigate("/home");
+//        }
     }
 
     public static AppState app(){
