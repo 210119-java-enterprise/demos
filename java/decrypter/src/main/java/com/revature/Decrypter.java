@@ -1,6 +1,5 @@
 package com.revature;
 
-import com.revature.screens.HomeScreen;
 import com.revature.util.AppState;
 
 public class Decrypter {
