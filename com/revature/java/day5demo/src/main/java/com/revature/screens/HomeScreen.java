@@ -1,9 +1,6 @@
 package com.revature.screens;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import static com.revature.Decrypter.app;
+import static com.revature.Decrypter.*;
 
 public class HomeScreen extends Screen {
 
@@ -32,7 +29,7 @@ public class HomeScreen extends Screen {
                     break;
                 case "2":
                     System.out.println("Navigating to registration screen...\n");
-                    app().getRouter().navigate("/registration");
+                    app().getRouter().navigate("/register");
                     break;
                 case "3":
                     System.out.println("Exiting application...\n");
