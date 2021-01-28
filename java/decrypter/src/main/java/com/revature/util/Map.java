@@ -1,5 +1,7 @@
 package com.revature.util;
 
+import java.util.Arrays;
+
 public class Map<K, V> {
 
     private int size;
@@ -13,6 +15,19 @@ public class Map<K, V> {
     }
 
     public V get(K key) {
+        for (int i = 0; i < size; i++) {
+
+                if (entries[i].key == null) {
+                    if (entries[i].key == key) {
+                        return entries[i].value;
+                    }
+                }
+
+                if (entries[i].key.equals(key)) {
+                    return entries[i].value;
+                }
+
+        }
         return null;
     }
 
@@ -34,7 +49,26 @@ public class Map<K, V> {
      * @return the previous value associated with the key, could return null
      */
     public V put(K key, V value) {
-        return null;
+
+        V previousValue = null;
+
+        boolean wasInserted = true;
+        for (int i = 0; i < size; i++) {
+            if (entries[i].key.equals(key)) {
+                previousValue = entries[i].value;
+                entries[i].value = value;
+                wasInserted = false;
+                break;
+            }
+        }
+
+        if (wasInserted) {
+            ensureCapacity();
+            entries[size++] = new Entry<>(key, value);
+        }
+
+        return previousValue;
+
     }
 
     public void remove(K key) {
@@ -47,7 +81,9 @@ public class Map<K, V> {
 
     // this method will be helpful after putting new entries into the map
     private void ensureCapacity() {
-
+        if (size == entries.length) {
+            entries = Arrays.copyOf(entries, entries.length * 2);
+        }
     }
 
     // this method will be helpful after removing a key from the map
