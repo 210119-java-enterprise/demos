@@ -1,0 +1,3 @@
+
+com.revature.models.Person@546b8d25
+Person{id=1, username='wsingleton', password='password', role=TRAINER}
