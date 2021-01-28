@@ -1,15 +1,8 @@
-package com.revature;
+package com.revature.util;
 
-import com.revature.screens.HomeScreen;
-import com.revature.util.AppState;
-import com.revature.util.Map;
-
-public class Decrypter {
-
-    private static AppState app = new AppState();
+public class MapTest {
 
     public static void main(String[] args) {
-
         Map<String, Integer> mapTest = new Map<>();
         mapTest.put("test1", 1);
         mapTest.put("test2", 2);
@@ -21,14 +14,9 @@ public class Decrypter {
 
         mapTest.put("test1", -1);
         System.out.println("size = "+ mapTest.size());
-        System.out.println("values of test1 = "+mapTest.get("test1"));
+        System.out.println("valuies of test1 = "+mapTest.get("test1"));
 
         mapTest.put(null, 0);
-        System.out.println("size = " + mapTest.size());
-        //System.out.println("values of null = "+ mapTest.get(null));
-
-        mapTest.put("nullVal", null);
-        System.out.println(mapTest.getOrDefault("nullVal", -5));
 
 
         System.out.println("size = "+ mapTest.size());
@@ -36,14 +24,5 @@ public class Decrypter {
 
         System.out.println(mapTest.get("test1"));
         System.out.println(mapTest.get("asd"));
-
-//        while (app.isAppRunning()) {
-//            app.getRouter().navigate("/home");
-//        }
-//
-    }
-
-    public static AppState app() {
-        return app;
     }
 }

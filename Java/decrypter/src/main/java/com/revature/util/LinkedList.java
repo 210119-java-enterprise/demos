@@ -8,6 +8,9 @@ public class LinkedList<T> {
 
     // Adds to tail
     public void insert(T data) {
+        if (data == null) {
+            return;
+        }
         Node<T> node = new Node<>(data, null, null);
         if (head == null) {
             tail = head = node;
@@ -35,14 +38,18 @@ public class LinkedList<T> {
 
     public T pop() {
 
-        if (head==null) {
+        if (size == 0) {
             return null;
         }
 
         T data = head.data;
 
-        head = head.nextNode;
-        head.prevNode = null;
+        if (size == 1) {
+            head = tail = null;
+        } else {
+            head = head.nextNode;
+            head.prevNode = null;
+        }
 
         size--;
 
