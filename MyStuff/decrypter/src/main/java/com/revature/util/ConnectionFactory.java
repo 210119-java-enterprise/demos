@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static ConnectionFactory connFactory = new ConnectionFactory();
+    private static ConnectionFactory connFactory = new ConnectionFactory();//eager singleton
 
     private Properties props = new Properties();
 
@@ -32,7 +32,7 @@ public class ConnectionFactory {
 
         try {
 
-            Class.forName("org.postgresql.Driver");
+            Class.forName("org.postgresql.Driver");//force loads driver
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("admin-usr"),
