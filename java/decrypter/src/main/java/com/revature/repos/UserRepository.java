@@ -1,15 +1,43 @@
 package com.revature.repos;
 
 import com.revature.models.AppUser;
+import com.revature.models.UserRole;
 import com.revature.util.ConnectionFactory;
+import com.revature.util.LinkedList;
 import com.revature.util.Set;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
+import static com.revature.Decrypter.app;
 
 public class UserRepository implements CrudRepository<AppUser>{
+
+    private final String base = "SELECT * " +
+                                "FROM app_users au " +
+                                "JOIN user_roles ur " +
+                                "USING (role_id) ";
+
+    public AppUser findUserByUsernameAndPassword(String username, String password) {
+
+        AppUser user = null;
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = base + "WHERE username = ? AND password = ? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery();
+            user = mapResultSet(rs).pop();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+
+    }
 
     public AppUser findUserByUsername(String username) {
 
@@ -17,20 +45,12 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM app_users WHERE username = ?";
+            String sql = base + "WHERE username = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                user = new AppUser();
-                user.setId(rs.getInt("user_id"));
-                user.setFirstName(rs.getString("first_name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-            }
+            user = mapResultSet(rs).pop();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,9 +91,22 @@ public class UserRepository implements CrudRepository<AppUser>{
     }
 
     @Override
-    public Set<AppUser> findAll() {
-        System.err.println("Not implemented");
-        return null;
+    public LinkedList<AppUser> findAll() {
+
+        Connection conn = app().getCurrentSession().getConnection();
+        LinkedList<AppUser> users = new LinkedList<>();
+
+        try {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(base);
+            users = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
     @Override
@@ -92,5 +125,24 @@ public class UserRepository implements CrudRepository<AppUser>{
     public boolean deleteById(int id) {
         System.err.println("Not implemented");
         return false;
+    }
+
+    private LinkedList<AppUser> mapResultSet(ResultSet rs) throws SQLException {
+
+        LinkedList<AppUser> users = new LinkedList<>();
+
+        while(rs.next()) {
+            AppUser user = new AppUser();
+            user.setId(rs.getInt("user_id"));
+            user.setFirstName(rs.getString("first_name"));
+            user.setLastName(rs.getString("last_name"));
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setUserRole(UserRole.valueOf(rs.getString("role_name")));
+            users.insert(user);
+        }
+
+        return users;
+
     }
 }
