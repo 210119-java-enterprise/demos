@@ -14,8 +14,19 @@ public class ConnectionFactory {
     private static ConnectionFactory connFactory = new ConnectionFactory();
     // Lazy Singleton will wait until getInstance() is called to create an instance
 
-    // Can use this to
+    // Can use this to access information in .properties file (username, password,
+    // etc.)
     private Properties props = new Properties();
+
+    {
+        try {
+            // Force loads driver so it's ready when we need to use it
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     private ConnectionFactory() {
         super();
@@ -36,13 +47,13 @@ public class ConnectionFactory {
         Connection conn = null;
 
         try {
-            Class.forName("org.postgresql.Driver");
-            // Don't put actual username and password in file
+            // Don't put actual username and password in this file
+            // Put in applications.properties file that isn't pushed to git
             conn = DriverManager.getConnection(
                 props.getProperty("url"), 
                 props.getProperty("admin-usr"), 
                 props.getProperty("admin-password"));
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
