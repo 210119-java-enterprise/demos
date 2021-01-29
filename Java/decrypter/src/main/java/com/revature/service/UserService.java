@@ -26,6 +26,12 @@ public class UserService {
         userRepo.save(newUser);
     }
 
+    public boolean validLogin(String username, String password) {
+        AppUser appUser = userRepo.findUserByUsername(username);
+
+        return (appUser != null && appUser.getPassword().equals(password));
+    }
+
     public boolean isUserValid(AppUser user) {
         if (user == null ) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;

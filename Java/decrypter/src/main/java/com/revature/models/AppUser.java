@@ -24,6 +24,11 @@ public class AppUser {
         this.userRole = copy.userRole;
     }
 
+    public AppUser(String username, String password) {
+        this.username = username;
+        this. password = password;
+    }
+
     public AppUser(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
