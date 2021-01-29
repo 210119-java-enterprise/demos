@@ -22,6 +22,7 @@ public class Set<T> {
         return map.isEmpty();
     }
 
+    // TODO: Probably should return something other than true all the time
     public boolean remove(T data) {
         map.remove(data);
         return true;

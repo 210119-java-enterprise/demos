@@ -2,8 +2,8 @@ package com.revature.service;
 
 import com.revature.models.AppUser;
 import com.revature.models.UserRole;
-import com.revature.models.exceptions.InvalidRequestException;
-import com.revature.models.exceptions.ResourcePersistenceException;
+import com.revature.exceptions.InvalidRequestException;
+import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.repos.UserRepository;
 
 public class UserService {

@@ -11,6 +11,7 @@ public class LinkedList<T> {
         if (data == null) {
             return;
         }
+
         Node<T> node = new Node<>(data, null, null);
         if (head == null) {
             tail = head = node;
@@ -29,7 +30,7 @@ public class LinkedList<T> {
 
         for (Node<T> currentNode = head; currentNode != null; currentNode = currentNode.nextNode){
             if (currentNode.data.equals(data)) {
-                return null;
+                return currentNode.data;
             }
         }
 
@@ -38,16 +39,15 @@ public class LinkedList<T> {
 
     public T pop() {
 
-        if (size == 0) {
+        if (head == null) {
             return null;
         }
 
         T data = head.data;
 
-        if (size == 1) {
-            head = tail = null;
-        } else {
-            head = head.nextNode;
+        head = head.nextNode;
+
+        if (head != null) {
             head.prevNode = null;
         }
 

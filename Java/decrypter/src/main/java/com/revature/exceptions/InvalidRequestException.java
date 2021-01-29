@@ -1,4 +1,4 @@
-package com.revature.models.exceptions;
+package com.revature.exceptions;
 
 public class InvalidRequestException extends RuntimeException{
 

@@ -5,13 +5,14 @@ import com.revature.util.Set;
 
 public class UserRepository implements CrudRepository<AppUser>{
 
-    public AppUser findUserByUsername(String string) {
+    public AppUser findUserByUsername(String username) {
+        System.err.println("Not Implemented");
         return null;
     }
 
     @Override
     public void save(AppUser newObj) {
-
+        System.err.println("Not Implemented");
     }
 
     @Override

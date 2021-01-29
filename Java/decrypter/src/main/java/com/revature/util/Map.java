@@ -42,10 +42,10 @@ public class Map<K, V> {
             if (entries[i] == null) {
                 if (entries[i] == key) {
                     return entries[i].value;
-                }
-            } else {
-                if (entries[i].key.equals(key)) {
-                    return entries[i].value;
+                } else {
+                    if (entries[i].key.equals(key)) {
+                        return entries[i].value;
+                    }
                 }
             }
         }
@@ -53,11 +53,11 @@ public class Map<K, V> {
     }
 
     public V getOrDefault(K key, V value) {
-        V temp = get(key);
-        if (get(key) == null) {
+        if (!containsKey(key)) {
             return value;
         }
-        return temp;
+
+        return get(key);
     }
 
     public boolean isEmpty() {
@@ -80,11 +80,12 @@ public class Map<K, V> {
                     entries[i].value = value;
                     return previousValue;
                 }
-            }
-            if (entries[i].key.equals(key)) {
-                V temp = entries[i]. value;
-                entries[i].value = value;
-                return temp;
+            } else {
+                if (entries[i].key.equals(key)) {
+                    V temp = entries[i].value;
+                    entries[i].value = value;
+                    return temp;
+                }
             }
         }
 
@@ -97,29 +98,19 @@ public class Map<K, V> {
     }
 
     public void remove(K key) {
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size; i++) {
             if ((entries[i].key == null && entries[i].key == key)) {
-                if (entries[i].key == key) {
-                    entries[i] = null;
-                    size--;
-                }
+                entries[i] = entries[size-1];
+                size--;
             } else {
                 if (entries[i].key.equals(key)) {
-                    entries[i] = entries[size - 1];
+                    entries[i] = entries[size-1];
                     size--;
                 }
             }
         }
 
-
-        if (entries[size].equals(key)) {
-            size--;
-        }
-
-        if ((size*2) < entries.length) {
-            condenseArray(entries.length/2);
-        }
-
+        condenseArray();
     }
 
     public int size() {
@@ -133,8 +124,10 @@ public class Map<K, V> {
 
     // this method will be helpful after removing a key from the map
     // guessing start is the length to truncate to
-    private void condenseArray(int start) {
-        entries = Arrays.copyOf(entries, start);
+    private void condenseArray() {
+        if (size*2 < entries.length) {
+            entries = Arrays.copyOf(entries, entries.length/2);
+        }
     }
 
     private static class Entry<K, V> {
