@@ -37,8 +37,7 @@ public class MyLinkedList<T> {
             newTail = new Node<T>(data, null, null);
             head = newTail;
         } else {
-            newTail = new Node<T>(data);
-            newTail.myPrevious = tail;
+            newTail = new Node<T>(data, null, tail);
             tail.myNext = newTail;
         }
         tail = newTail;

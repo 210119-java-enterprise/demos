@@ -3,8 +3,12 @@ package com.revature.services;
 import com.revature.models.AppUser;
 import com.revature.models.UserRole;
 import com.revature.repos.UserRepository;
+import com.revature.util.Session;
+import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.InvalidRequestException;
 import com.revature.exceptions.ResourcePersistenceException;
+
+import static com.revature.Decrypter.app;
 
 public class UserService {
 
@@ -38,5 +42,22 @@ public class UserService {
         if (user.getPassword() == null || user.getPassword().trim().equals(""))
             return false;
         return true;
+    }
+
+    public AppUser login(String username, String password) {
+        if (!isCredentialsValid(username, password))
+            throw new InvalidRequestException("Invalid username or password provided");
+        AppUser user = userRepo.findUserByCredentials(username, password);
+        if (user == null)
+            throw new AuthenticationException();
+            
+        return user;
+    }
+
+    private boolean isCredentialsValid(String username, String password) {
+        if (username == null || username.trim().equals("")) return false;
+        if (password == null || password.trim().equals("")) return false;
+        return true;
+
     }
 }

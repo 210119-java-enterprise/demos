@@ -175,7 +175,7 @@ public class Map<K, V> {
 
     public MyLinkedList<K> keyList() {
         MyLinkedList<K> keyList = new MyLinkedList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < capacity; i++) {
             if (entries[i] != null && entries[i].key != null) {
                 keyList.append(entries[i].key);
             }

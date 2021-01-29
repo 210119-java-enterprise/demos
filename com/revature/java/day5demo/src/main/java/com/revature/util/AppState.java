@@ -7,6 +7,7 @@ import com.revature.repos.UserRepository;
 import com.revature.screens.HomeScreen;
 import com.revature.screens.LoginScreen;
 import com.revature.screens.RegisterScreen;
+import com.revature.screens.Screen;
 import com.revature.services.UserService;
 
 public class AppState {
@@ -17,6 +18,7 @@ public class AppState {
 
     final UserRepository userRepo = new UserRepository();
     final UserService userService = new UserService(userRepo);
+    private Session currentSession;
 
     public AppState() {
         System.out.println("[LOG] - initializing application...");
@@ -28,7 +30,8 @@ public class AppState {
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
                 .addScreen(new RegisterScreen(userService))
-                .addScreen(new LoginScreen());
+                .addScreen(new LoginScreen(userService));
+        
     }
 
     public BufferedReader getConsole() {
@@ -45,6 +48,22 @@ public class AppState {
 
     public ScreenRouter getRouter() {
         return router;
+    }
+
+    public void setCurrentSession(Session session) {
+        currentSession = session;
+    }
+
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+
+    public void invalidateCurrentSession() {
+        this.currentSession = null;
+    }
+
+    public boolean isSessionValid() {
+        return (this.currentSession != null);
     }
     
 }

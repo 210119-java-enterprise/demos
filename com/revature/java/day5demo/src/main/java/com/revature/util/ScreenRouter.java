@@ -14,10 +14,12 @@ public class ScreenRouter {
     public ScreenRouter addScreen(Screen screen) {
         System.out.println("[LOG] Loading screen " + screen.getRoute() + " into router...");
         screens.add(screen);
+
         return this;
     }
 
     public void navigate(String route) {
+        System.out.println("Navigating to " + route);
         for (Screen screen : screens.toArray(Screen.class)) {
             if (screen != null && screen.getRoute().equals(route)) {
                 screen.render();
