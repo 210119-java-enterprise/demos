@@ -46,5 +46,53 @@ public class MapTest {
         System.out.println(m0.containsKey("One")? "\t1" : "\t1 failed");
         System.out.println(m0.containsKey("Nope")? "\t2 failed" : "\t2");
         System.out.println(m0.containsKey(null)? "\t3 failed" : "\t3");
+
+        System.out.println("Testing remove()...");
+        Map<String, Integer> m2 = new Map<String, Integer>();
+        m2.put("One", 1);
+        m2.put("Two", 2);
+        m2.remove("One");
+        System.out.println((m2.getSize() == 1)? "\t1" : "\t1 failed");
+        System.out.println((m2.get("One") == null)? "\t2" : "\t2 failed");
+        
+        Map<String, Integer> m3 = new Map<String, Integer>();
+        m3 = generateBasicMap();
+        System.out.println(m3);
+        System.out.println(m3.getSize());
+        System.out.println((m3.getSize() == 17)? "\t3" : "\t3 failed");
+        m3.remove("One");
+        System.out.println(m3.getSize());
+        System.out.println((m3.getSize() == 16)? "\t4" : "\t4 failed");
+        m3.remove("Two");
+        System.out.println(m3);
+        System.out.println(m3.getSize());
+        System.out.println((m3.getSize() == 15)? "\t4" : "\t4 failed");
+        System.out.println((m3.getCapacity() == 16)? "\t5" : "\t5 failed");
+
+
+    }
+
+    public static Map<String, Integer> generateBasicMap() {
+        Map<String, Integer> res = new Map<String, Integer>();
+        res.put("One", 1);
+        res.put("Two", 2);
+        res.put("Three", 3);
+        res.put("Four", 3);
+        res.put("Five", 3);
+        res.put("Six", 3);
+        res.put("Seven", 3);
+        res.put("Eight", 3);
+        res.put("Nine", 3);
+        res.put("Ten", 3);
+        res.put("Eleven", 3);
+        res.put("Twelve", 3);
+        res.put("Thirteen", 3);
+        res.put("Fourteen", 3);
+        res.put("Fifteen", 3);
+        res.put("Sixteen", 3);
+        res.put("Seventeen", 3);
+
+
+        return res;
     }
 }

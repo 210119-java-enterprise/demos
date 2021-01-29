@@ -62,10 +62,7 @@ public class Map<K, V> {
     }
 
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     /**
@@ -101,11 +98,14 @@ public class Map<K, V> {
     }
 
     public void remove(K key) {
+        if (key == null) {
+            return;
+        }
         if (size == 0) {
             return;
         }
         for (int i = 0; i < size; i++) {
-            if (entries[i].key.equals(key)) {
+            if (entries[i] != null && entries[i].key != null && entries[i].key.equals(key)) {
                 entries[i] = null;
                 consdenseArray(i);
                 size--;
@@ -160,6 +160,27 @@ public class Map<K, V> {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    @Override
+    public String toString() {
+        String res = "";
+        for (Entry<K,V> entry : entries) {
+            if (entry != null) {
+                res += entry + "\n";
+            }
+        }
+        return res;
+    }
+
+    public MyLinkedList<K> keyList() {
+        MyLinkedList<K> keyList = new MyLinkedList<>();
+        for (int i = 0; i < size; i++) {
+            if (entries[i] != null && entries[i].key != null) {
+                keyList.append(entries[i].key);
+            }
+        }
+        return keyList;
     }
 
 
