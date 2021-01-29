@@ -1,10 +1,15 @@
 package com.revature.services;
 
 import com.revature.dao.UserDao;
+import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.InvalidRequestException;
 import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.AppUser;
 import com.revature.models.UserRole;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.Session;
+
+import static com.revature.SampleApp.app;
 
 public class UserService {
 
@@ -32,5 +37,19 @@ public class UserService {
         if (user.getUserName() == null || user.getUserName().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
         return true;
+    }
+
+    public void authenticate(String username, String password){
+        if(username == null || username.trim().equals("") || password == null || password.trim().equals("")){
+            throw new InvalidRequestException("Invalid credentials");
+        }
+
+        AppUser authUser = userDao.findUserByUsernameAndPassword(username, password);
+
+        if(authUser == null){
+            throw new AuthenticationException();
+        }
+
+        app().setCurrentSession(new Session(authUser, ConnectionFactory.getInstance().getConnection()));
     }
 }

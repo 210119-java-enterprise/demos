@@ -41,4 +41,9 @@ public class Set<T> {
         }
         return keyArray;
     }
+
+    public T get(){
+        System.out.println("not implemented");
+        return null;
+    }
 }

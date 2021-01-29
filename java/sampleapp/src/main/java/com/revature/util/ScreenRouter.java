@@ -22,15 +22,5 @@ public class ScreenRouter {
                 screen.render();
             }
         }
-//        LinkedList<Screen> tempScreens = new LinkedList<>();
-//        Screen currentScreen = screens.pop();
-//        while(currentScreen != null){
-//            tempScreens.insert(currentScreen);
-//            if(currentScreen.getRoute().equals(route)){
-//                currentScreen.render();
-//            }
-//            currentScreen = screens.pop();
-//        }
-//        screens = tempScreens;
     }
 }
