@@ -58,7 +58,7 @@ public class AppState {
     }
 
     public boolean isSessionValid() {
-        return (this.currentSession == null);
+        return (this.currentSession != null);
     }
 
     public Session getCurrentSession() {

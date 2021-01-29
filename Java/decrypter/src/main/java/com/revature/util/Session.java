@@ -12,7 +12,7 @@ public class Session {
 
     public Session(AppUser sessionUser, Connection conn) {
 
-        if (sessionUser == null || connection == null) {
+        if (sessionUser == null || conn == null) {
             throw new ExceptionInInitializerError(" Cannot establish user session, null values provided!");
         }
 

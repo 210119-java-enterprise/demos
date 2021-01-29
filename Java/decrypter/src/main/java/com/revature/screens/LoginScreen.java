@@ -32,19 +32,27 @@ public class LoginScreen extends Screen{
             System.out.println("Password: ");
             password = app().getConsole().readLine();
 
-            boolean loggedIn = userService.validLogin(username, password);
+            // Original way to check, uses a boolean check method to see if it is a valid user.
+            //boolean loggedIn = userService.validLogin(username, password);
 
-            if (!loggedIn) {
-                throw new AuthenticationException("There is no account with that username and password combination");
-            } else {
-                System.out.println("You logged in!");
+            // New way, uses the overhead session class to see if we are in a valid session.
+            userService.authenticate(username, password);
+
+            if (app().isSessionValid()) {
+                System.out.println("[LOG] - Login successful, navigating to dashboard...");
+//                app().getRouter().navigate("/dashboard");
             }
 
             // pass our new user to a service class that will validate it and then pass it on to a DAO that will attempt
             // to persist it, we'll get something back to let us know how to navigate from here.
 
+        } catch (InvalidRequestException | AuthenticationException e) {
+            System.err.println("[INFO] - Invalid login credentials provided!");
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("[SEVERE] - An unexpected exception occured");
+            System.err.println("[FATAL] - Shutting down the application");
+            app().setAppRunning(false);
         }
     }
 }
