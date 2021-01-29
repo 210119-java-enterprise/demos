@@ -14,6 +14,19 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
+
+    public AppUser login(String username, String password) {
+        AppUser user;
+
+        if (userRepo.findUserByUsernameAndPassword(username, password) != null) {
+           user=userRepo.findUserByUsernameAndPassword(username, password);
+            return user;
+        }
+        return null;//  TODO NULL is BAD
+
+    }
+
+
     public void register(AppUser newUser) {
 
         if (!isUserValid(newUser)){

@@ -9,9 +9,9 @@ public class RegisterScreen extends Screen {
 
     private UserService userService;
 
-    public RegisterScreen() {
+    public RegisterScreen(UserService userService) {
         super("RegisterScreen", "/register");
-        this.usersService
+        this.userService = userService;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class RegisterScreen extends Screen {
 
         try {
 
-            System.out.println("\n\n\n\n\n\n\n\n\n\n+---------------------+");
+            System.out.println("+---------------------+");
             System.out.println("Sign up for a new account!");
             System.out.print("First name: ");
             firstName = app().getConsole().readLine();
@@ -37,9 +37,7 @@ public class RegisterScreen extends Screen {
 
             AppUser newUser = new AppUser(firstName, lastName, username, password);
 
-            // pass our new user to a service class that will validate it and then pass it on
-            // to a DAO that will attempt to persist it, we'll get something back to let us
-            // know how to navigate from here.
+            userService.register(newUser);
 
         } catch (Exception e) {
             e.printStackTrace();
