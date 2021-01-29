@@ -1,13 +1,17 @@
 package com.revature.screens;
 
 import com.revature.models.AppUser;
+import com.revature.service.UserService;
 
 import static com.revature.Decrypter.app;
 
 public class RegisterScreen extends Screen{
 
-    public RegisterScreen() {
+    private UserService userService;
+
+    public RegisterScreen(UserService userService) {
         super("RegisterScreen", "/register");
+        this.userService = userService;
     }
 
     @Override
@@ -31,6 +35,8 @@ public class RegisterScreen extends Screen{
             password = app().getConsole().readLine();
 
             AppUser newUser = new AppUser(firstName, lastName, username, password);
+
+            userService.register(newUser);
 
             // pass our new user to a service class that will validate it and then pass it on to a DAO that will attempt
             // to persist it, we'll get something back to let us know how to navigate from here.
