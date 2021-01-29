@@ -41,6 +41,7 @@ public class LoginScreen extends Screen {
         } catch (InvalidRequestException | AuthenticationException e) {
             System.err.println("[INFO] - Invalid login credentials provided!");
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println("[SEVERE] - An unexpected exception occurred");
             System.err.println("[FATAL] - Shutting down application");
             app().setAppRunning(false);

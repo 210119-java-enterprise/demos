@@ -52,6 +52,10 @@ public class AppState {
         this.appRunning = appRunning;
     }
 
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+
     public void setCurrentSession(Session currentSession) {
         this.currentSession = currentSession;
     }

@@ -6,10 +6,9 @@ import com.revature.util.ConnectionFactory;
 import com.revature.util.LinkedList;
 import com.revature.util.Set;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
+import static com.revature.Decrypter.app;
 
 public class UserRepository implements CrudRepository<AppUser>{
 
@@ -92,9 +91,22 @@ public class UserRepository implements CrudRepository<AppUser>{
     }
 
     @Override
-    public Set<AppUser> findAll() {
-        System.err.println("Not implemented");
-        return null;
+    public LinkedList<AppUser> findAll() {
+
+        Connection conn = app().getCurrentSession().getConnection();
+        LinkedList<AppUser> users = new LinkedList<>();
+
+        try {
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(base);
+            users = mapResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
     @Override
