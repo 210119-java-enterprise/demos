@@ -14,6 +14,7 @@ public class AppState {
     private BufferedReader console;
     private ScreenRouter router;
     private boolean appRunning;
+    private Session currentSession;
 
     public AppState() {
 

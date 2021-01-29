@@ -16,7 +16,10 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM app_users WHERE username = ? AND password = ?";
+            String sql = "SELECT * " +
+                    "FROM app_users " +
+                    "WHERE username = ? " +
+                    "AND password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             pstmt.setString(2, password);

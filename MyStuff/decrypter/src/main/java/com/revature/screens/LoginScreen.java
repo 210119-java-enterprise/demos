@@ -22,7 +22,7 @@ public class LoginScreen extends Screen{
 
         try {
 
-            System.out.println("+---------------------+");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n+---------------------+\n\n\n\n");
             System.out.println("Log into your account");
 
             System.out.print("Username: ");
@@ -31,7 +31,12 @@ public class LoginScreen extends Screen{
             password = app().getConsole().readLine();
 
             AppUser user = userService.login( username,  password);
-            System.out.println("Logged in");
+
+            if (user!=null){
+                System.out.println("Logged in");
+                System.out.println("\nWelcome "+user.getFirstName()+" "+user.getLastName());
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

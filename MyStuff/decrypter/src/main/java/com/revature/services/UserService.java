@@ -22,6 +22,8 @@ public class UserService {
            user=userRepo.findUserByUsernameAndPassword(username, password);
             return user;
         }
+        System.out.println("Invalid Credentials");
+        
         return null;//  TODO NULL is BAD
 
     }
