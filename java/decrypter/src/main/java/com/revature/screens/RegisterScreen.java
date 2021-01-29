@@ -1,13 +1,17 @@
 package com.revature.screens;
 
 import com.revature.models.AppUser;
+import com.revature.services.UserService;
 
 import static com.revature.Decrypter.app;
 
 public class RegisterScreen extends Screen {
 
+    private UserService userService;
+
     public RegisterScreen() {
         super("RegisterScreen", "/register");
+        this.userService = userService;
     }
 
     @Override
