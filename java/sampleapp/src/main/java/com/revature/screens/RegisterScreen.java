@@ -1,13 +1,17 @@
 package com.revature.screens;
 
 import com.revature.models.AppUser;
+import com.revature.services.UserService;
 
 import static com.revature.SampleApp.app;
 
 public class RegisterScreen extends Screen{
 
-    public RegisterScreen(){
+    private UserService userService;
+
+    public RegisterScreen(UserService userService){
         super("RegisterScreen", "/register");
+        this.userService = userService;
     }
 
     @Override
@@ -18,7 +22,7 @@ public class RegisterScreen extends Screen{
         String username;
         String password;
         try {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n+--------------------+");
+            System.out.println("+--------------------+");
             System.out.println("Sign up for a new account!");
             System.out.print("First Name:");
             firstName = app().getConsoleReader().readLine();
@@ -31,6 +35,7 @@ public class RegisterScreen extends Screen{
 
             AppUser newUser = new AppUser(firstName,lastName,username,password);
 
+            userService.register(newUser);
             //pass new user to a service class to validate
             //then pass to dao to attempt persist it
             //navigate from here
