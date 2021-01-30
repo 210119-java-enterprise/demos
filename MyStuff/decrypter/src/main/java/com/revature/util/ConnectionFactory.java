@@ -1,6 +1,5 @@
 package com.revature.util;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,9 +9,17 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static ConnectionFactory connFactory = new ConnectionFactory();//eager singleton
+    private static ConnectionFactory connFactory = new ConnectionFactory();
 
     private Properties props = new Properties();
+
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     private ConnectionFactory() {
         try {
@@ -32,14 +39,13 @@ public class ConnectionFactory {
 
         try {
 
-            Class.forName("org.postgresql.Driver");//force loads driver
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("admin-usr"),
                     props.getProperty("admin-pw")
             );
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

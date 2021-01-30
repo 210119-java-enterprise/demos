@@ -1,5 +1,7 @@
 package com.revature.util;
 
+import com.revature.models.AppUser;
+
 public class LinkedList<T> {
 
     private int size;
@@ -43,13 +45,13 @@ public class LinkedList<T> {
             return null;
         }
 
+        T popped = head.data;
+        head = head.nextNode;
 
-            T popped = head.data;
-        if(head.nextNode!=null) {
-            head = head.nextNode;
+        if (head != null) {
             head.prevNode = null;
         }
-        else {head=null;}
+
         size--;
 
         return popped;

@@ -3,6 +3,7 @@ package com.revature.models;
 import java.util.Objects;
 
 public class AppUser {
+
     private int id;
     private String firstName;
     private String lastName;
@@ -10,36 +11,30 @@ public class AppUser {
     private String password;
     private UserRole userRole;
 
+    public AppUser() {
+        super();
+    }
 
-
-    public AppUser(AppUser copy){
-        this.id=copy.id;
-        this.firstName=copy.firstName;
-        this.lastName=copy.lastName;
-        this.username=copy.username;
-        this.password=copy.password;
-        this.userRole=copy.userRole;
+    public AppUser(AppUser copy) {
+        this.id = copy.id;
+        this.firstName = copy.firstName;
+        this.lastName = copy.lastName;
+        this.username = copy.username;
+        this.password = copy.password;
+        this.userRole = copy.userRole;
     }
 
     public AppUser(String firstName, String lastName, String username, String password) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-
     }
-
 
     public AppUser(int id, String firstName, String lastName, String username, String password, UserRole userRole) {
         this(firstName, lastName, username, password);
         this.id = id;
         this.userRole = userRole;
-    }
-
-
-    public AppUser(){
-        super();
     }
 
     public int getId() {
@@ -90,13 +85,17 @@ public class AppUser {
         this.userRole = userRole;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return id == appUser.id && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastName, appUser.lastName) && Objects.equals(username, appUser.username) && Objects.equals(password, appUser.password) && userRole == appUser.userRole;
+        return id == appUser.id &&
+                Objects.equals(firstName, appUser.firstName) &&
+                Objects.equals(lastName, appUser.lastName) &&
+                Objects.equals(username, appUser.username) &&
+                Objects.equals(password, appUser.password) &&
+                userRole == appUser.userRole;
     }
 
     @Override
@@ -115,4 +114,5 @@ public class AppUser {
                 ", userRole=" + userRole +
                 '}';
     }
+
 }

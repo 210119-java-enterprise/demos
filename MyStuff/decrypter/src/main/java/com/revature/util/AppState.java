@@ -13,8 +13,8 @@ public class AppState {
 
     private BufferedReader console;
     private ScreenRouter router;
-    private boolean appRunning;
     private Session currentSession;
+    private boolean appRunning;
 
     public AppState() {
 
@@ -29,8 +29,8 @@ public class AppState {
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-                .addScreen(new RegisterScreen(userService))
-                .addScreen(new LoginScreen(userService));
+              .addScreen(new RegisterScreen(userService))
+              .addScreen(new LoginScreen(userService));
 
         System.out.println("[LOG] - Application initialized");
 
@@ -50,6 +50,22 @@ public class AppState {
 
     public void setAppRunning(boolean appRunning) {
         this.appRunning = appRunning;
+    }
+
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+
+    public void setCurrentSession(Session currentSession) {
+        this.currentSession = currentSession;
+    }
+
+    public void invalidateCurrentSession() {
+        this.currentSession = null;
+    }
+
+    public boolean isSessionValid() {
+        return (this.currentSession != null);
     }
 
 }

@@ -6,17 +6,18 @@ import com.revature.models.UserRole;
 import java.sql.Connection;
 
 public class Session {
+
     private AppUser sessionUser;
     private Connection connection;
 
-    public Session(AppUser sessionUser, Connection connection){
+    public Session(AppUser sessionUser, Connection connection) {
 
-        if(sessionUser==null||connection==null){
-            throw new ExceptionInInitializerError("Cannot establish user session -- null values");
+        if (sessionUser == null || connection == null) {
+            throw new ExceptionInInitializerError("Cannot establish user session, null values provided!");
         }
-        this.sessionUser=sessionUser;
-        this.connection=connection;
 
+        this.sessionUser = sessionUser;
+        this.connection = connection;
 
     }
 
@@ -36,7 +37,8 @@ public class Session {
         this.connection = connection;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return (sessionUser.getUserRole().equals(UserRole.ADMIN));
     }
+
 }

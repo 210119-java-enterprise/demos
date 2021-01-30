@@ -1,10 +1,17 @@
 package com.revature.services;
 
+import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.InvalidRequestException;
 import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.AppUser;
 import com.revature.models.UserRole;
 import com.revature.repos.UserRepository;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.Session;
+
+import java.sql.Connection;
+
+import static com.revature.Decrypter.app;
 
 public class UserService {
 
@@ -14,20 +21,21 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
+    public void authenticate(String username, String password) {
 
-    public AppUser login(String username, String password) {
-        AppUser user;
-
-        if (userRepo.findUserByUsernameAndPassword(username, password) != null) {
-           user=userRepo.findUserByUsernameAndPassword(username, password);
-            return user;
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+            throw new InvalidRequestException("Invalid credentials provided (null or empty strings)!");
         }
-        System.out.println("Invalid Credentials");
-        
-        return null;//  TODO NULL is BAD
+
+        AppUser authUser = userRepo.findUserByUsernameAndPassword(username, password);
+
+        if (authUser == null) {
+            throw new AuthenticationException();
+        }
+
+        app().setCurrentSession(new Session(authUser, ConnectionFactory.getInstance().getConnection()));
 
     }
-
 
     public void register(AppUser newUser) {
 
