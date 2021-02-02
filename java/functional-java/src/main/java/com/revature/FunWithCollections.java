@@ -39,7 +39,8 @@ public class FunWithCollections {
         batchMapping.computeIfAbsent(javaAngular, batch -> new ArrayList<>()).add(kalyb); // this does not execute the provided lambda
         batchMapping.computeIfAbsent(javaAngular, batch -> new ArrayList<>()).add(daniel); // neither does this
 
-        // print out or associates
+        // print out our associates
+        System.out.println("Associates in the Python batch = " + batchMapping.getOrDefault(new Batch("python", TechStack.PYTHON), Collections.EMPTY_LIST));
         System.out.println("Associates in the .NET/React December batch = " + batchMapping.getOrDefault(cSharpReact, Collections.EMPTY_LIST));
         System.out.println("Associates in the Java/Angular January batch = " + batchMapping.getOrDefault(javaAngular, Collections.EMPTY_LIST));
 
@@ -53,7 +54,7 @@ public class FunWithCollections {
 
         // how to go about merging our two maps? :thinking_face:
 
-        // For each entry (batch, user) in our second batch mapping
+        // For each entry (batch, users) in our second batch mapping
         batchMapping2.forEach((batch, users) -> {
 
             // each iteration we will attempt to merge the batch and its users (params 1 & 2) into our
@@ -64,7 +65,7 @@ public class FunWithCollections {
                 batch1Users.addAll(batch2Users);
 
                 // return batch 1 users
-                return batch1Users; // I'm not actually catch this, but we need a return because .merge requires it
+                return batch1Users; // I'm not actually catching this, but we need a return because .merge requires it
             });
         });
 
