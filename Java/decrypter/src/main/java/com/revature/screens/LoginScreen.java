@@ -40,7 +40,7 @@ public class LoginScreen extends Screen{
 
             if (app().isSessionValid()) {
                 System.out.println("[LOG] - Login successful, navigating to dashboard...");
-//                app().getRouter().navigate("/dashboard");
+//               app().getRouter().navigate("/dashboard");
             }
 
             // pass our new user to a service class that will validate it and then pass it on to a DAO that will attempt
