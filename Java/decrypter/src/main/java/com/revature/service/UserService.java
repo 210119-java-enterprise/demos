@@ -48,11 +48,8 @@ public class UserService {
             throw new InvalidRequestException("Invalid credentials provided (null or empty strings)!");
         }
 
-        AppUser authUser = userRepo.findUserByUsernameAndPassword(username, password);
-
-        if (authUser == null) {
-            throw new AuthenticationException();
-        }
+        AppUser authUser = userRepo.findUserByUsernameAndPassword(username, password)
+                                    .orElseThrow(AuthenticationException::new);
 
         app().setCurrentSession(new Session(authUser, ConnectionFactory.getInstance().getConnection()));
     }

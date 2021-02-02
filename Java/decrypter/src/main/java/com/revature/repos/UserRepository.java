@@ -8,6 +8,7 @@ import com.revature.util.Set;
 import sun.awt.image.ImageWatched;
 
 import java.sql.*;
+import java.util.Optional;
 
 import static com.revature.Decrypter.app;
 
@@ -40,9 +41,9 @@ public class UserRepository implements CrudRepository<AppUser>{
     }
 
     // Returns AppUser of the corresponding username and password
-    public AppUser findUserByUsernameAndPassword(String username, String password) {
+    public Optional<AppUser> findUserByUsernameAndPassword(String username, String password) {
 
-        AppUser user = null;
+        Optional<AppUser> _user = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -52,12 +53,14 @@ public class UserRepository implements CrudRepository<AppUser>{
             pstmt.setString(2,password);
 
             ResultSet rs = pstmt.executeQuery();
-            user = mapResultSet(rs).pop();
+            _user = Optional.ofNullable(mapResultSet(rs).pop());
+            // Optional.of will throw an exception if you pass a null object to it
+            // Optional.ofNullable will allow storing a null value in it
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return user;
+        return _user;
     }
 
     @Override
