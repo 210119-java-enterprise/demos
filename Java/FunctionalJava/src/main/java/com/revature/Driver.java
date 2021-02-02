@@ -1,5 +1,11 @@
 package com.revature;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Driver {
@@ -58,5 +64,31 @@ public class Driver {
         Supplier<String> stringSupplier = () -> "Something";
         String someString = stringSupplier.get();
         System.out.println(someString);
+
+        List<String> strings = new ArrayList<>(Arrays.asList("one", "two", "three", "four", "five"));
+
+        System.out.println("+---------------------");
+        //toString
+        System.out.println(strings.toString());
+
+        System.out.println("+--------------");
+        // traditional for-loop
+        for (int i = 0; i < strings.size(); i++) {
+            System.out.println(strings.get(i));
+        }
+
+        // for each
+        System.out.println("+---------------------");
+        for (String s: strings) {
+            System.out.println(s);
+        }
+
+        System.out.println("+---------------");
+        // Iterable#forEach using a lambda expression
+        strings.forEach(str -> System.out.println(str));
+
+        System.out.println("+---------------------");
+        strings.forEach(System.out::println);
+
     }
 }
