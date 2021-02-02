@@ -8,6 +8,10 @@ public class User {
         this.name = name;
     }
 
+    public User(int i) {
+        //Compuler smart enough to know which
+    }
+
     public String getName() {
         return name;
     }

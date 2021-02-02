@@ -1,5 +1,7 @@
 package com.revature;
 
+import com.revature.models.User;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +36,10 @@ public class FunctionalDriver {
                     + T = the parameter, R = return tyoe
                     + R apply(T val);
                     +takes in a value of type T, returns a value of type R
+
+              The fifth type of functional interface is not actually in the java.util function
+              package. It comes from java.lang, and is the Runnable Interface. It takes in nothing,
+              and returns nothing.
      */
 
     public static void main(String[] args) {
@@ -95,6 +101,10 @@ public class FunctionalDriver {
         System.out.println("+------------------------");
 
         Predicate<String> startsWithT = str -> (str.startsWith("T") || str.startsWith("t"));
+        strings.removeIf(startsWithT);
+        strings.forEach(System.out::println);
+
+        System.out.println("+----------------------------------------");
 
         // There are methods on the List interface (and other Collection types) that can take in predicates and
         // manipulate the original collection
@@ -102,9 +112,17 @@ public class FunctionalDriver {
         mutableStringList.removeIf(startsWithT);
         mutableStringList.forEach(System.out::println);
 
-        strings.removeIf(startsWithT);
-        strings.forEach(System.out::println);
+        System.out.println("+--------------------------------");
 
-        Function<String, Integer> stringIntegerFunction;
+        Function<String, User> mapStringToUser1 = str -> {
+            return new User(str);
+        };
+
+        Function<String, User> mapStringToUser2 = str -> new User(str);
+
+        Function<String, User> mapStringToUser3 = User::new;
+
+        User mappedUser = mapStringToUser3.apply("Eli");
+        System.out.println(mappedUser.getName());
     }
 }
