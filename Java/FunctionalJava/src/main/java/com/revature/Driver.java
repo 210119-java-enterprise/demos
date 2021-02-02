@@ -1,11 +1,14 @@
 package com.revature;
 
+import java.util.function.Supplier;
+
 public class Driver {
 
     public static void main(String[] args) {
 
         // Local anonymous class
         // Can be an inline implementation of any abstract type (interface or abstract class)
+        // Local anon classes actually create another class file at compilation (making JAR bigger)
         Animal newAnimal = new Animal() {
 
             @Override
@@ -29,7 +32,7 @@ public class Driver {
             public void run() {
                 System.out.println("This is a local anonymous class that implements the Runnable interface");
             }
-        })
+        });
 
         Thread t2 = new Thread(() -> {
             System.out.println("This is a lambda expression that implements the Runnable interface.");
@@ -50,5 +53,10 @@ public class Driver {
                 - () -> expression
                 - () -> { code block of expressions }
          */
+
+        // Lambda expressions are converted into private methods at compile time
+        Supplier<String> stringSupplier = () -> "Something";
+        String someString = stringSupplier.get();
+        System.out.println(someString);
     }
 }
