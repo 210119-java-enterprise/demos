@@ -1,5 +1,8 @@
 package com.revature.nested;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 // can use static import to only import specific static members of a class (can't create instances)
@@ -117,6 +120,41 @@ public class Driver {
 
         
 
+        /**
+         *      Legal lambda syntaxes
+         *          - (parameter) -> expression
+         *          - parameter -> expression
+         *          - parameter -> {code block of expressions}
+         *          - (parameter, parameter) -> expression
+         *          - (parameter, parameter) -> {code block of expressions}
+         *          - () -> expression
+         *          - () -> {code block of expressions}
+         */
+
+         // How can we print these out?
+         List<String> strings = Arrays.asList("one", "two", "three", "four", "five");
+         
+         System.out.println("-----------------------");
+         // for i loop
+         for (int i = 0; i < strings.size(); i++) {
+             System.out.println(strings.get(i));
+         }
+
+         System.out.println("-----------------------");
+         // for each loop
+         for (String string : strings) {
+             System.out.println(string);
+         }
+
+         System.out.println("-----------------------");
+         // Using lambda
+         strings.forEach(str -> System.out.println(str));
+
+         System.out.println("-----------------------");
+         // Using method reference
+         strings.forEach(System.out::println);
+
+         
 
 
     }

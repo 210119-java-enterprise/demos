@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 
 import com.revature.util.ConnectionFactory;
 import com.revature.util.MyLinkedList;
@@ -128,8 +129,8 @@ public class UserRepository implements CrudRepository<AppUser> {
         return users;
     }
 
-    public AppUser findUserByCredentials(String username, String password) {
-        AppUser user = null;
+    public Optional<AppUser> findUserByCredentials(String username, String password) {
+        Optional<AppUser> _user = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             // ? is where the username will go (in PreparedStatement)
@@ -139,14 +140,14 @@ public class UserRepository implements CrudRepository<AppUser> {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             
-            user = mapResultSet(pstmt).pop();
+            _user = Optional.of(mapResultSet(pstmt).pop());
             
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
-        return user;
+        return _user;
     }
 
     

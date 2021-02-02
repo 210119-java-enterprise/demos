@@ -47,9 +47,9 @@ public class UserService {
     public AppUser login(String username, String password) {
         if (!isCredentialsValid(username, password))
             throw new InvalidRequestException("Invalid username or password provided");
-        AppUser user = userRepo.findUserByCredentials(username, password);
-        if (user == null)
-            throw new AuthenticationException();
+        
+        AppUser user = userRepo.findUserByCredentials(username, password)
+                                .orElseThrow(AuthenticationException::new);
             
         return user;
     }
