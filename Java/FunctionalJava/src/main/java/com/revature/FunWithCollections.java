@@ -30,17 +30,24 @@ public class FunWithCollections {
         batchMapping.computeIfAbsent(javaAngular, batch -> new ArrayList<>()).add(greg);
         batchMapping.computeIfAbsent(javaAngular, batch -> new ArrayList<>()).add(wezley);
 
+        // print out associates
         System.out.println("Associates in the .NET December batch = " + batchMapping.getOrDefault(cSharpReact, Collections.EMPTY_LIST));
         System.out.println("Associates in the Java/Angular January batch = "+ batchMapping.getOrDefault(javaAngular, Collections.EMPTY_LIST));
 
-        Map<Batch, List<User>> batchMapping2 = new HashMap<>();
 
+        Map<Batch, List<User>> batchMapping2 = new HashMap<>();
 
         batchMapping2.computeIfAbsent(cSharpReact, batch -> new ArrayList<>()).add(jay);
         batchMapping2.computeIfAbsent(javaAngular, batch -> new ArrayList<>()).add(greg);
         batchMapping2.computeIfAbsent(javaAngular, batch -> new ArrayList<>()).add(wezley);
 
+        // how to merge the two maps?
+
+        // For each entry (batch, users) in our second batch mapping
         batchMapping2.forEach((batch, users) -> {
+
+            // each iteration we will attempt to merge the batch and its users (params 1 & 2)  into our
+            // first batch mapping
             batchMapping.merge(batch, users, (batch1Users, batch2Users) -> {
                 batch1Users.addAll(batch2Users);
                 return batch1Users;
