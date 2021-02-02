@@ -2,6 +2,9 @@ package com.revature.util;
 
 import com.revature.models.AppUser;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class LinkedList<T> {
 
     private int size;
@@ -97,6 +100,7 @@ public class LinkedList<T> {
         }
     }
 
+    HashSet
     private static class Node<T> {
         T data;
         Node<T> nextNode;
