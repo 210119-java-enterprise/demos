@@ -1,17 +1,13 @@
 package com.revature.models;
 
-public class User {
+public class Batch {
 
     private String name;
-    private int age;
+    private TechStack stack;
 
-    public User(String name) {
+    public Batch(String name, TechStack stack) {
         this.name = name;
-    }
-
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
+        this.stack = stack;
     }
 
     public String getName() {
@@ -22,19 +18,20 @@ public class User {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public TechStack getStack() {
+        return stack;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setStack(TechStack stack) {
+        this.stack = stack;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Batch{" +
                 "name='" + name + '\'' +
-                ", age=" + age +
+                ", stack=" + stack +
                 '}';
     }
+
 }

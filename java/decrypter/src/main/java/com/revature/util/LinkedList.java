@@ -100,7 +100,6 @@ public class LinkedList<T> {
         }
     }
 
-    HashSet
     private static class Node<T> {
         T data;
         Node<T> nextNode;
