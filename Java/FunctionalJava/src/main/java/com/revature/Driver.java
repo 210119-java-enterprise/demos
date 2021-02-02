@@ -1,11 +1,10 @@
 package com.revature;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+import com.revature.models.Animal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Driver {

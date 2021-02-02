@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.models;
 
 public class Dog extends Animal{
     @Override
