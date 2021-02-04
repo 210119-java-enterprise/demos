@@ -1,12 +1,15 @@
-package com.revature;
+package com.revature.model;
 
 import java.util.List;
+
+import com.revature.annotations.Ignore;
+import com.revature.annotations.NotNull;
 
 public class User {
     private String username;
     private String password;
     private int id;
-    private transient List<String> features;
+    private List<String> features;
 
     public User() {
         super();
@@ -16,11 +19,10 @@ public class User {
         this.id = id;
     }
 
-    public User(String username, String password, int id, List<String> features) {
+    public User(int id, String username, String password) {
         this.username = username;
         this.password = password;
         this.id = id;
-        this.features = features;
     }
 
     public String getUsername() {
@@ -31,11 +33,12 @@ public class User {
         this.username = username;
     }
 
+    @Ignore
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NotNull String password) {
         this.password = password;
     }
 
