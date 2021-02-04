@@ -50,6 +50,7 @@ public class Driver {
             String read = new String(readBuffer.array());
 
             System.out.println(read);
+            System.out.println(Files.readAllLines(path));
 
             BasicFileAttributes fileAttr = Files.readAttributes(file, BasicFileAttributes.class);
 
