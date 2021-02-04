@@ -2,10 +2,7 @@ package com.revature;
 
 import com.revature.model.User;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Arrays;
 
 public class ClassInspector {
@@ -35,6 +32,7 @@ public class ClassInspector {
     public static void listNonPublicConstructors(Class<?> clazz) {
         System.out.println("Printing the non-public constructors of the " + clazz.getName());
         Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+
         for (Constructor<?> constructor : constructors) {
             if ((constructor.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC) {
                 continue;
@@ -89,10 +87,16 @@ public class ClassInspector {
         for (Method method : methods) {
             System.out.println("\tName: " + method.getName());
             Class<?>[] parameterTypes = method.getParameterTypes();
-            System.out.println("\tParameter count: " + parameterTypes.length);
-            System.out.println("\tParameter types: " + Arrays.toString(parameterTypes));
             System.out.println("\tDeclaring class: " + method.getDeclaringClass().getName());
-            System.out.println("\tDeclared annotations: " + Arrays.toString(method.getDeclaredAnnotations()) + "\n");
+            System.out.println("\tDeclared annotations: " + Arrays.toString(method.getDeclaredAnnotations()));
+
+            System.out.println("\tParameter count: " + parameterTypes.length);
+            for (Parameter param : method.getParameters()) {
+                System.out.println("\t\tParameter name: " + param.getName());
+                System.out.println("\t\tParameter type: " + param.getType());
+                System.out.println("\t\tParameter annotations: " + Arrays.toString(param.getAnnotations()));
+            }
+            System.out.println();
         }
     }
 
@@ -113,11 +117,18 @@ public class ClassInspector {
 
             System.out.println("\tName: " + method.getName());
             Class<?>[] parameterTypes = method.getParameterTypes();
-            System.out.println("\tParameter count: " + parameterTypes.length);
-            System.out.println("\tParameter types: " + Arrays.toString(parameterTypes));
             System.out.println("\tModifiers bit value: " + Integer.toBinaryString(method.getModifiers()));
             System.out.println("\tDeclaring class: " + method.getDeclaringClass().getName());
-            System.out.println("\tDeclared annotations: " + Arrays.toString(method.getDeclaredAnnotations()) + "\n");
+            System.out.println("\tDeclared annotations: " + Arrays.toString(method.getDeclaredAnnotations()));
+
+            System.out.println("\tParameter count: " + parameterTypes.length);
+            Parameter[] params = method.getParameters();
+            for (Parameter param : params) {
+                System.out.println("\t\tParameter name: " + param.getName());
+                System.out.println("\t\tParameter type: " + param.getType());
+                System.out.println("\t\tParameter annotations: " + Arrays.toString(param.getAnnotations()));
+            }
+            System.out.println();
         }
     }
 

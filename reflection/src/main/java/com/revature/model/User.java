@@ -1,6 +1,7 @@
 package com.revature.model;
 
 import com.revature.annotations.Ignore;
+import com.revature.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -48,7 +49,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NotNull String password) {
         this.password = password;
     }
 
