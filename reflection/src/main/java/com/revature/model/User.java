@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import com.revature.annotations.Ignore;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +39,7 @@ public class User {
         this.username = username;
     }
 
+    @Ignore
     public String getPassword() {
         return password;
     }
