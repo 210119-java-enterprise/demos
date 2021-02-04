@@ -16,6 +16,10 @@ public class User {
         super();
     }
 
+    protected User(int id) {
+        this.id = id;
+    }
+
     public User(int id, String username, String password, List<String> features) {
         this.id = id;
         this.username = username;
