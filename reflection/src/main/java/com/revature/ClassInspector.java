@@ -20,7 +20,7 @@ public class ClassInspector {
         listPublicFields(clazz);
         listNonPublicFields(clazz);
         listPublicMethods(clazz);
-        listNonPublicMethods(clazz);
+        listDeclaredMethods(clazz);
     }
 
     public static void listPublicConstructors(Class<?> clazz) {
@@ -96,9 +96,9 @@ public class ClassInspector {
         }
     }
 
-    private static void listNonPublicMethods(Class<?> clazz) {
+    private static void listDeclaredMethods(Class<?> clazz) {
 
-        System.out.println("Listing the non-public methods of the class: " + clazz.getName());
+        System.out.println("Listing all of the declared methods of the class: " + clazz.getName());
         Method[] methods = clazz.getDeclaredMethods();
 
         if (methods.length == 0) {
