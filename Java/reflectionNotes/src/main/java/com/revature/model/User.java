@@ -1,5 +1,7 @@
 package com.revature.model;
 
+import com.revature.annotations.Ignore;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +14,10 @@ public class User {
 
     public User() {
 
+    }
+
+    protected User(int id) {
+        this.id = id;
     }
 
     public User(int id, String username, String password, List<String> features) {
@@ -37,6 +43,7 @@ public class User {
         this.username = username;
     }
 
+    @Ignore
     public String getPassword() {
         return password;
     }
