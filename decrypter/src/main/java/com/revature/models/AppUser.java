@@ -1,39 +1,38 @@
 package com.revature.models;
 
+import java.util.Objects;
+
 public class AppUser {
 
-
     private int id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private UserRole userRole;
 
-    public AppUser(){
+    public AppUser() {
         super();
     }
 
-    public AppUser(AppUser copy){
-        this.id=copy.id;
-        this.firstname=copy.firstname;
-        this.lastname=copy.lastname;
-        this.username=copy.username;
-        this.password=copy.password;
-        this.userRole=copy.userRole;
-
+    public AppUser(AppUser copy) {
+        this.id = copy.id;
+        this.firstName = copy.firstName;
+        this.lastName = copy.lastName;
+        this.username = copy.username;
+        this.password = copy.password;
+        this.userRole = copy.userRole;
     }
 
-    public AppUser(String firstname, String lastname,String username, String password, UserRole userRole) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username= username;
+    public AppUser(String firstName, String lastName, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
         this.password = password;
-        this.userRole = userRole;
     }
 
-    public AppUser(int id, String firstname, String lastname,String username, String password, UserRole userRole) {
-       this.(firstname,lastname,username,password);
+    public AppUser(int id, String firstName, String lastName, String username, String password, UserRole userRole) {
+      this(firstName, lastName, username, password);
         this.id = id;
         this.userRole = userRole;
     }
@@ -46,20 +45,20 @@ public class AppUser {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -90,25 +89,30 @@ public class AppUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         AppUser appUser = (AppUser) o;
-
-        if (id != appUser.id) return false;
-        if (firstname != null ? !firstname.equals(appUser.firstname) : appUser.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(appUser.lastname) : appUser.lastname != null) return false;
-        if (username != null ? !username.equals(appUser.username) : appUser.username != null) return false;
-        if (password != null ? !password.equals(appUser.password) : appUser.password != null) return false;
-        return userRole == appUser.userRole;
+        return id == appUser.id &&
+                Objects.equals(firstName, appUser.firstName) &&
+                Objects.equals(lastName, appUser.lastName) &&
+                Objects.equals(username, appUser.username) &&
+                Objects.equals(password, appUser.password) &&
+                userRole == appUser.userRole;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
-        return result;
+        return Objects.hash(id, firstName, lastName, username, password, userRole);
     }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userRole=" + userRole +
+                '}';
+    }
+
 }
