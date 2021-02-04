@@ -9,7 +9,7 @@ public class User {
 
     private int id;
     private String username;
-    private String password;
+    private transient String password;
     private List<String> features;
 
     public User() {
