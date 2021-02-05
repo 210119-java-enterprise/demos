@@ -1,9 +1,13 @@
 package com.revature.util;
 
 import com.revature.screens.Screen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sun.awt.image.ImageWatched;
 
 public class ScreenRouter {
+
+    private static final Logger logger = LogManager.getLogger(ScreenRouter.class);
 
     private Set<Screen> screens = new Set<>();
 
@@ -12,13 +16,16 @@ public class ScreenRouter {
     }
 
     public ScreenRouter addScreen(Screen screen) {
-        System.out.println("[Log] - Loading "+ screen.getName()+" into router");
+        logger.warn("test warning");
+        logger.trace("Loading "+ screen.getName()+" into router");
         screens.add(screen);
         return this;
     }
 
     // TODO clean this up with a new data structure
     public void navigate(String route) {
+        logger.error("test error");
+        logger.fatal("Test fatal");
 
         for (Screen screen : screens.toArray(Screen.class)) {
             if (screen.getRoute().equals(route)) {

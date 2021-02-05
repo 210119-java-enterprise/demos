@@ -5,11 +5,15 @@ import com.revature.screens.HomeScreen;
 import com.revature.screens.LoginScreen;
 import com.revature.screens.RegisterScreen;
 import com.revature.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class AppState {
+
+    private static final Logger logger = LogManager.getLogger(AppState.class);
 
     private BufferedReader console;
     private ScreenRouter router;
@@ -17,7 +21,8 @@ public class AppState {
     private boolean appRunning;
 
     public AppState() {
-        System.out.println("[LOG] - Initializing application...");
+
+        logger.info("Initializing application...");
 
         this.appRunning = true;
         this.console = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +35,7 @@ public class AppState {
                 .addScreen(new RegisterScreen(userService))
                 .addScreen(new LoginScreen(userService));
 
-        System.out.println("[LOG] - Application initialization");
+        logger.info("Application initialization");
     }
 
     public ScreenRouter getRouter() {
