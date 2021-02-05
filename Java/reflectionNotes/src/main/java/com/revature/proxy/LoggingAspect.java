@@ -17,7 +17,6 @@ public class LoggingAspect implements InvocationHandler {
         System.out.printf("Method %s invoked at %s\n", method.getName(), LocalDateTime.now().toString());
         Object returnedObject = method.invoke(original, params);
         System.out.printf("Method %s returned at %s with value %s\n", method.getName(), LocalDateTime.now().toString(), returnedObject);
-        System.out.println(returnedObject);
         return null;
     }
 }

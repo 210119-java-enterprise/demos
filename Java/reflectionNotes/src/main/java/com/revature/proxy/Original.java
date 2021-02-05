@@ -1,9 +1,9 @@
 package com.revature.proxy;
 
 public class Original implements If {
-
     @Override
-    public String originalMethod() {
-
+    public String originalMethod(String s) {
+        System.out.println(s);
+        return s + " - extra stuff";
     }
 }

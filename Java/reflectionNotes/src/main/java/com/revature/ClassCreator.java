@@ -4,6 +4,7 @@ import com.revature.model.User;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 public class ClassCreator {
 
@@ -12,16 +13,16 @@ public class ClassCreator {
         User u = null;
         Constructor<?> noArgConstructor = null;
         Constructor<?>[] constructors = User.class.getConstructors();
-        for (Constructor<?> constructor : constructors) {
-            if (constructor.getParameterTypes().length == 0) {
-                noArgConstructor = constructor;
-                System.out.println(noArgConstructor.getName() + " "+ noArgConstructor.getParameterTypes().length);
-                u = (User) noArgConstructor.newInstance();
-                System.out.println(u);
-                u.setId(10);
-                u.setPassword("password");
-                System.out.println(u);
-            }
-        }
+
+        u = (User) Arrays.stream(constructors)
+                .filter(c -> c.getParameterTypes().length == 0)
+                .findFirst()
+                .orElseThrow(RuntimeException::new)
+                .newInstance();
+
+        u.setId(10);
+        u.setUsername("wsingleton");
+        u.setPassword("password");
+        System.out.println(u);
     }
 }

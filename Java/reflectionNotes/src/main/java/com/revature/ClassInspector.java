@@ -2,24 +2,22 @@ package com.revature;
 
 import com.revature.model.User;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Arrays;
 
 public class ClassInspector {
 
     public static void main(String[] args) {
-        //User user = new User(1);
         inspectClass(User.class);
-        listNonPublicConstructors(User.class);
-        listPublicFields(User.class);
-        listNonPublicFields(User.class);
     }
 
     public static void inspectClass(Class<?> clss) {
         listPublicConstructors(clss);
+        listNonPublicConstructors(clss);
+        listPublicFields(clss);
+        listNonPublicFields(clss);
+        listPublicMethods(clss);
+        listDeclaredMethods(clss);
     }
 
     public static void listPublicConstructors(Class<?> clss) {
@@ -54,6 +52,7 @@ public class ClassInspector {
             System.out.println("\tField name: "+field.getName());
             System.out.println("\tField type: "+field.getType());
             System.out.println("\tIs field primitive? :: " + field.getType().isPrimitive() + "\n");
+            System.out.println("\tModifiers bit value: " + Integer.toBinaryString(field.getModifiers())  + "\n");
         }
     }
 
@@ -68,21 +67,62 @@ public class ClassInspector {
             System.out.println("\tField name: "+field.getName());
             System.out.println("\tField type: "+field.getType());
             System.out.println("\tIs field primitive? :: " + field.getType().isPrimitive() + "\n");
+            System.out.println("\tModifiers bit value: " + Integer.toBinaryString(field.getModifiers())  + "\n");
         }
     }
 
-    private static void listDeclareMethods(Class<?> clss) {
-        System.out.println("Listing the public methods of the class "+clss.getName());
+    private static void listPublicMethods(Class<?> clazz) {
+        System.out.println("Listing the public methods of the class: " + clazz.getName());
+        Method[] methods = clazz.getMethods();
 
-        Method[] methods = clss.getMethods();
         if (methods.length == 0) {
-            System.out.println("\tThere are no public methods in the class "+clss.getName());
+            System.out.println("\tThere are no public methods in the class " + clazz.getName());
         }
 
         for (Method method : methods) {
-            System.out.println("\tMethod name: "+method.getName());
-            //System.out.println("\tMethod type: ");
-            //System.out.println("\tIs field primitive? :: " + method.is + "\n");
+            System.out.println("\tName: " + method.getName());
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            System.out.println("\tDeclaring class: " + method.getDeclaringClass().getName());
+            System.out.println("\tDeclared annotations: " + Arrays.toString(method.getDeclaredAnnotations()));
+
+            System.out.println("\tParameter count: " + parameterTypes.length);
+            for (Parameter param : method.getParameters()) {
+                System.out.println("\t\tParameter name: " + param.getName());
+                System.out.println("\t\tParameter type: " + param.getType());
+                System.out.println("\t\tParameter annotations: " + Arrays.toString(param.getAnnotations()));
+            }
+            System.out.println();
+        }
+    }
+
+    private static void listDeclaredMethods(Class<?> clss) {
+        System.out.println("Listing the declared methods of the class "+clss.getName());
+        Method[] methods = clss.getMethods();
+
+        if (methods.length == 0) {
+            System.out.println("\tThere are no non-public methods in the class "+clss.getName());
+        }
+
+        for (Method method : methods) {
+
+            if ((method.getModifiers() & Modifier.PUBLIC) == Modifier.PUBLIC) {
+                continue;
+            }
+
+            System.out.println("\tName: " + method.getName());
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            System.out.println("\tModifiers bit value: " + Integer.toBinaryString(method.getModifiers()));
+            System.out.println("\tDeclaring class: " + method.getDeclaringClass().getName());
+            System.out.println("\tDeclared annotations: " + Arrays.toString(method.getDeclaredAnnotations()));
+
+            System.out.println("\tParameter count: " + parameterTypes.length);
+            Parameter[] params = method.getParameters();
+            for (Parameter param : params) {
+                System.out.println("\t\tParameter name: " + param.getName());
+                System.out.println("\t\tParameter type: " + param.getType());
+                System.out.println("\t\tParameter annotations: " + Arrays.toString(param.getAnnotations()));
+            }
+            System.out.println();
         }
     }
 }
