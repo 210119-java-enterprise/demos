@@ -23,6 +23,21 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
+    public AppUser authenticate_example(String username, String password) {
+
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+            throw new InvalidRequestException("Invalid credentials provided (null or empty strings)!");
+        }
+
+
+        AppUser authUser = userRepo.findUserByUsernameAndPassword(username, password)
+                .orElseThrow(AuthenticationException::new);
+
+
+        return authUser;
+
+    }
+
     public void authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {

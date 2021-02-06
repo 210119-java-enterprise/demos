@@ -1,8 +1,13 @@
 package com.revature.util;
 
 import com.revature.screens.Screen;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class ScreenRouter {
+
+    private static final Logger logger = LogManager.getLogger(ScreenRouter.class);
 
     private Set<Screen> screens = new Set<>();
 
@@ -11,7 +16,7 @@ public class ScreenRouter {
     }
 
     public ScreenRouter addScreen(Screen screen) {
-        System.out.println("[LOG] - Loading " + screen.getName() + " into router");
+        logger.trace("Loading " + screen.getName() + " into router");
         screens.add(screen);
         return this;
     }
