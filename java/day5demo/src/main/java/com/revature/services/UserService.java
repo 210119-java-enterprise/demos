@@ -31,7 +31,7 @@ public class UserService {
     }
 
     // AppUser must have non-null first name, last name, username, password
-    private boolean isUserValid(AppUser user) {
+    public boolean isUserValid(AppUser user) {
         if (user == null) return false;
         if (user.getfName() == null || user.getfName().trim().equals(""))
             return false;
