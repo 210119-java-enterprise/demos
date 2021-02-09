@@ -1,0 +1,10 @@
+15:32:30.629 [main] INFO  com.revature.util.AppState - Initializing application
+15:32:30.632 [main] WARN  com.revature.util.ScreenRouter - test warning
+15:32:30.633 [main] TRACE com.revature.util.ScreenRouter - Loading HomeScreen into router
+15:32:30.633 [main] WARN  com.revature.util.ScreenRouter - test warning
+15:32:30.633 [main] TRACE com.revature.util.ScreenRouter - Loading RegisterScreen into router
+15:32:30.633 [main] WARN  com.revature.util.ScreenRouter - test warning
+15:32:30.633 [main] TRACE com.revature.util.ScreenRouter - Loading LoginScreen into router
+15:32:30.633 [main] INFO  com.revature.util.AppState - Application initialized
+15:32:30.633 [main] ERROR com.revature.util.ScreenRouter - test error
+15:32:30.634 [main] FATAL com.revature.util.ScreenRouter - test fatal

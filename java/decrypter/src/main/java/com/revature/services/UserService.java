@@ -1,10 +1,19 @@
 package com.revature.services;
 
+import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.InvalidRequestException;
 import com.revature.exceptions.ResourcePersistenceException;
 import com.revature.models.AppUser;
 import com.revature.models.UserRole;
 import com.revature.repos.UserRepository;
+import com.revature.util.ConnectionFactory;
+import com.revature.util.Session;
+
+import java.sql.Connection;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
+import static com.revature.Decrypter.app;
 
 public class UserService {
 
@@ -12,6 +21,36 @@ public class UserService {
 
     public UserService(UserRepository userRepo) {
         this.userRepo = userRepo;
+    }
+
+    public AppUser authenticate_example(String username, String password) {
+
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+            throw new InvalidRequestException("Invalid credentials provided (null or empty strings)!");
+        }
+
+
+        AppUser authUser = userRepo.findUserByUsernameAndPassword(username, password)
+                .orElseThrow(AuthenticationException::new);
+
+
+        return authUser;
+
+    }
+
+    public void authenticate(String username, String password) {
+
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+            throw new InvalidRequestException("Invalid credentials provided (null or empty strings)!");
+        }
+
+
+        AppUser authUser = userRepo.findUserByUsernameAndPassword(username, password)
+                                    .orElseThrow(AuthenticationException::new);
+
+
+        app().setCurrentSession(new Session(authUser, ConnectionFactory.getInstance().getConnection()));
+
     }
 
     public void register(AppUser newUser) {
@@ -30,11 +69,16 @@ public class UserService {
     }
 
     public boolean isUserValid(AppUser user) {
+
         if (user == null) return false;
-        if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
-        if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
-        if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
-        if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
+
+        Predicate<String> isNullOrEmpty = s -> (s == null || s.trim().equals(""));
+
+        if (isNullOrEmpty.test(user.getUsername())) return false;
+        if (isNullOrEmpty.test(user.getPassword())) return false;
+        if (isNullOrEmpty.test(user.getFirstName())) return false;
+        if (isNullOrEmpty.test(user.getLastName())) return false;
+
         return true;
     }
 
