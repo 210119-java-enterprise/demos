@@ -2,6 +2,7 @@ package com.revature.orm;
 
 import com.revature.orm.models.User;
 import com.revature.orm.util.ColumnField;
+import com.revature.orm.util.IdField;
 import com.revature.orm.util.Metamodel;
 
 import java.util.List;

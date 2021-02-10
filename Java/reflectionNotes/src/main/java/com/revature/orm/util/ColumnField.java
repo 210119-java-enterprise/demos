@@ -14,5 +14,7 @@ public class ColumnField {
         return field.getName();
     }
 
-    public Class<?>
+    public Class<?> getType() {
+        return field.getType();
+    }
 }
