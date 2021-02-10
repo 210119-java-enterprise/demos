@@ -4,9 +4,9 @@ import com.revature.models.AppUser;
 import com.revature.models.UserRole;
 import com.revature.util.ConnectionFactory;
 import com.revature.util.LinkedList;
-import com.revature.util.Set;
 
 import java.sql.*;
+import java.util.Optional;
 
 import static com.revature.Decrypter.app;
 
@@ -17,9 +17,9 @@ public class UserRepository implements CrudRepository<AppUser>{
                                 "JOIN user_roles ur " +
                                 "USING (role_id) ";
 
-    public AppUser findUserByUsernameAndPassword(String username, String password) {
+    public Optional<AppUser> findUserByUsernameAndPassword(String username, String password) {
 
-        AppUser user = null;
+        Optional<AppUser> _user = Optional.empty();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -29,13 +29,15 @@ public class UserRepository implements CrudRepository<AppUser>{
             pstmt.setString(2, password);
 
             ResultSet rs = pstmt.executeQuery();
-            user = mapResultSet(rs).pop();
+            _user = Optional.ofNullable(mapResultSet(rs).pop());
+            // Optional.of will throw an exception if you pass a null object to it
+            // Optional.ofNullable will allow for a null value to be passed
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return user;
+        return _user;
 
     }
 
