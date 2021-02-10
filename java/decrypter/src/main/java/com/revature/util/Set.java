@@ -11,20 +11,20 @@ public class Set<T> {
     }
 
     public boolean add(T data) {
-        return this.map.put(data, data.hashCode()) == null;
+        return map.put(data, data.hashCode()) == null;
     }
 
     public boolean contains(T data) {
-        return this.map.containsKey(data);
+        return map.containsKey(data);
     }
 
     public boolean isEmpty() {
-        return this.map.isEmpty();
+        return map.isEmpty();
     }
 
-    // TODO: probably should return something other than true all the time. maybe?
+    // TODO: Probably should return something other than true all the time
     public boolean remove(T data) {
-        this.map.remove(data);
+        map.remove(data);
         return true;
     }
 

@@ -1,6 +1,8 @@
 package com.revature;
 
+import com.revature.screens.HomeScreen;
 import com.revature.util.AppState;
+import com.revature.util.Map;
 
 public class Decrypter {
 
@@ -11,10 +13,10 @@ public class Decrypter {
         while (app.isAppRunning()) {
             app.getRouter().navigate("/home");
         }
+
     }
 
     public static AppState app() {
         return app;
     }
-
 }

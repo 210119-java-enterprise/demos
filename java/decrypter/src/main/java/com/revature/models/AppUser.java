@@ -12,7 +12,7 @@ public class AppUser {
     private UserRole userRole;
 
     public AppUser() {
-        super();
+
     }
 
     public AppUser(AppUser copy) {
@@ -22,6 +22,11 @@ public class AppUser {
         this.username = copy.username;
         this.password = copy.password;
         this.userRole = copy.userRole;
+    }
+
+    public AppUser(String username, String password) {
+        this.username = username;
+        this. password = password;
     }
 
     public AppUser(String firstName, String lastName, String username, String password) {
@@ -90,12 +95,7 @@ public class AppUser {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return id == appUser.id &&
-                Objects.equals(firstName, appUser.firstName) &&
-                Objects.equals(lastName, appUser.lastName) &&
-                Objects.equals(username, appUser.username) &&
-                Objects.equals(password, appUser.password) &&
-                userRole == appUser.userRole;
+        return id == appUser.id && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastName, appUser.lastName) && Objects.equals(username, appUser.username) && Objects.equals(password, appUser.password) && userRole == appUser.userRole;
     }
 
     @Override
@@ -114,5 +114,4 @@ public class AppUser {
                 ", userRole=" + userRole +
                 '}';
     }
-
 }

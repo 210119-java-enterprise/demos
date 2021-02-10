@@ -10,15 +10,14 @@ public class Session {
     private AppUser sessionUser;
     private Connection connection;
 
-    public Session(AppUser sessionUser, Connection connection) {
+    public Session(AppUser sessionUser, Connection conn) {
 
-        if (sessionUser == null || connection == null) {
-            throw new ExceptionInInitializerError("Cannot establish user session, null values provided!");
+        if (sessionUser == null || conn == null) {
+            throw new ExceptionInInitializerError(" Cannot establish user session, null values provided!");
         }
 
         this.sessionUser = sessionUser;
-        this.connection = connection;
-
+        this.connection = conn;
     }
 
     public AppUser getSessionUser() {
@@ -40,5 +39,4 @@ public class Session {
     public boolean isAdmin() {
         return (sessionUser.getUserRole().equals(UserRole.ADMIN));
     }
-
 }

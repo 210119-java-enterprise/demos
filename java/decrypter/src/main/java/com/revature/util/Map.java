@@ -10,17 +10,22 @@ public class Map<K, V> {
     @SuppressWarnings("unchecked")
     private Entry<K, V>[] entries = new Entry[DEFAULT_CAPACITY];
 
+    public Map() {
+        size = 0;
+    }
+
     public boolean containsKey(K key) {
         for (int i = 0; i < size; i++) {
             if (entries[i].key == null) {
                 if (entries[i].key == key) {
                     return true;
                 }
-            } else if (entries[i].key.equals(key)) {
-                return true;
+            } else {
+                if (entries[i].key.equals(key)) {
+                    return true;
+                }
             }
         }
-
         return false;
     }
 
@@ -34,95 +39,78 @@ public class Map<K, V> {
 
     public V get(K key) {
         for (int i = 0; i < size; i++) {
-
-            if (entries[i].key == null) {
-                if (entries[i].key == key) {
+            if (entries[i] == null) {
+                if (entries[i] == key) {
                     return entries[i].value;
+                } else {
+                    if (entries[i].key.equals(key)) {
+                        return entries[i].value;
+                    }
                 }
-            } else if (entries[i].key.equals(key)) {
-                return entries[i].value;
             }
-
         }
         return null;
     }
 
-    public V getOrDefault(K key, V defaultValue) {
-
+    public V getOrDefault(K key, V value) {
         if (!containsKey(key)) {
-            return defaultValue;
+            return value;
         }
 
         return get(key);
-
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return (size == 0);
     }
 
     /**
-     * Adds a new entry to the map using the provided key and value. Returns the
-     * value previously associated with the key. If the key was not in the map prior,
-     * returns null.
-     *
-     * @param key
-     * @param value
-     * @return the previous value associated with the key, could return null
+     * Adds a new entry to the map using the provided key and value. Returns the value previously associated with the
+     * key. If the key was not in the prior, returns null.
+     * @param key the key to have the associated value changed
+     * @param value the new value to associate with the key
+     * @return the previous value associated with the key, returns null if they key didn't have a value
      */
     public V put(K key, V value) {
 
-        V previousValue = null;
-
-        boolean wasInserted = true;
         for (int i = 0; i < size; i++) {
-
             if (entries[i].key == null) {
                 if (entries[i].key == key) {
-                    previousValue = entries[i].value;
+                    V previousValue = entries[i].value;
                     entries[i].value = value;
-                    wasInserted = false;
-                    break;
+                    return previousValue;
                 }
-            } else if (entries[i].key.equals(key)) {
-                previousValue = entries[i].value;
-                entries[i].value = value;
-                wasInserted = false;
-                break;
+            } else {
+                if (entries[i].key.equals(key)) {
+                    V temp = entries[i].value;
+                    entries[i].value = value;
+                    return temp;
+                }
             }
-
         }
 
-        if (wasInserted) {
+        if (size == entries.length) {
             ensureCapacity();
-            entries[size++] = new Entry<>(key, value);
         }
-
-        return previousValue;
-
+        entries[size] = new Entry<>(key, value);
+        size++;
+        return null;
     }
 
     public void remove(K key) {
-
-        boolean wasRemoved = false;
         for (int i = 0; i < size; i++) {
-            if (entries[i].key == null) {
-                if (entries[i].key == key) {
-                    entries[i] = entries[size - 1];
-                    size--;
-                    wasRemoved = true;
-                }
-            } else if (entries[i].key.equals(key)) {
-                entries[i] = entries[size - 1];
+            if ((entries[i].key == null && entries[i].key == key)) {
+                entries[i] = entries[size-1];
                 size--;
-                wasRemoved = true;
+            } else {
+                if (entries[i].key.equals(key)) {
+                    entries[i] = entries[size-1];
+                    size--;
+                }
             }
         }
 
-        if (wasRemoved) {
-            condenseArray();
-        }
-
+        condenseArray();
     }
 
     public int size() {
@@ -131,15 +119,14 @@ public class Map<K, V> {
 
     // this method will be helpful after putting new entries into the map
     private void ensureCapacity() {
-        if (size == entries.length) {
-            entries = Arrays.copyOf(entries, entries.length * 2);
-        }
+        entries = Arrays.copyOf(entries, entries.length*2);
     }
 
     // this method will be helpful after removing a key from the map
+    // guessing start is the length to truncate to
     private void condenseArray() {
-        if (size * 2 < entries.length) {
-            entries = Arrays.copyOf(entries, entries.length / 2);
+        if (size*2 < entries.length) {
+            entries = Arrays.copyOf(entries, entries.length/2);
         }
     }
 
@@ -160,7 +147,6 @@ public class Map<K, V> {
                     ", value=" + value +
                     '}';
         }
-
     }
 
 }

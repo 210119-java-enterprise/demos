@@ -4,6 +4,8 @@ import com.revature.models.AppUser;
 import com.revature.models.UserRole;
 import com.revature.util.ConnectionFactory;
 import com.revature.util.LinkedList;
+import com.revature.util.Set;
+import sun.awt.image.ImageWatched;
 
 import java.sql.*;
 import java.util.Optional;
@@ -17,37 +19,14 @@ public class UserRepository implements CrudRepository<AppUser>{
                                 "JOIN user_roles ur " +
                                 "USING (role_id) ";
 
-    public Optional<AppUser> findUserByUsernameAndPassword(String username, String password) {
-
-        Optional<AppUser> _user = Optional.empty();
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = base + "WHERE username = ? AND password = ? ";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-
-            ResultSet rs = pstmt.executeQuery();
-            _user = Optional.ofNullable(mapResultSet(rs).pop());
-            // Optional.of will throw an exception if you pass a null object to it
-            // Optional.ofNullable will allow for a null value to be passed
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return _user;
-
-    }
-
+    // Returns appuser with corresponding username
     public AppUser findUserByUsername(String username) {
 
         AppUser user = null;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = base + "WHERE username = ?";
+            String sql = base + "WHERE username = ? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
 
@@ -59,7 +38,29 @@ public class UserRepository implements CrudRepository<AppUser>{
         }
 
         return user;
+    }
 
+    // Returns AppUser of the corresponding username and password
+    public Optional<AppUser> findUserByUsernameAndPassword(String username, String password) {
+
+        Optional<AppUser> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = base + "WHERE username = ? AND password = ? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2,password);
+
+            ResultSet rs = pstmt.executeQuery();
+            _user = Optional.ofNullable(mapResultSet(rs).pop());
+            // Optional.of will throw an exception if you pass a null object to it
+            // Optional.ofNullable will allow storing a null value in it
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return _user;
     }
 
     @Override
@@ -68,14 +69,14 @@ public class UserRepository implements CrudRepository<AppUser>{
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO app_users (username, password, first_name, last_name, role_id) " +
-                         "VALUES (?, ?, ?, ?, ?)";
+                            "VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
             pstmt.setString(1, newObj.getUsername());
-            pstmt.setString(2, newObj.getPassword());
-            pstmt.setString(3, newObj.getFirstName());
-            pstmt.setString(4, newObj.getLastName());
-            pstmt.setInt(5, newObj.getUserRole().ordinal() + 1);
+            pstmt.setString(2,newObj.getPassword());
+            pstmt.setString(3,newObj.getFirstName());
+            pstmt.setString(4,newObj.getLastName());
+            pstmt.setInt(5, newObj.getUserRole().ordinal()+1);
 
             int rowsInserted = pstmt.executeUpdate();
 
@@ -86,9 +87,8 @@ public class UserRepository implements CrudRepository<AppUser>{
                 }
             }
 
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
@@ -103,7 +103,6 @@ public class UserRepository implements CrudRepository<AppUser>{
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(base);
             users = mapResultSet(rs);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,7 +132,7 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         LinkedList<AppUser> users = new LinkedList<>();
 
-        while(rs.next()) {
+        while (rs.next()) { // iterates through records/rows
             AppUser user = new AppUser();
             user.setId(rs.getInt("user_id"));
             user.setFirstName(rs.getString("first_name"));
@@ -145,6 +144,5 @@ public class UserRepository implements CrudRepository<AppUser>{
         }
 
         return users;
-
     }
 }

@@ -1,2 +1,2 @@
-15:32:30.633 [main] ERROR com.revature.util.ScreenRouter - test error
-15:32:30.634 [main] FATAL com.revature.util.ScreenRouter - test fatal
+12:32:54.978 [main] ERROR com.revature.util.ScreenRouter - test error
+12:32:54.978 [main] FATAL com.revature.util.ScreenRouter - Test fatal

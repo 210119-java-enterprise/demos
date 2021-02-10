@@ -1,7 +1,6 @@
 package com.revature.util;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,12 +20,14 @@ public class ConnectionFactory {
         }
     }
 
+
     private ConnectionFactory() {
         try {
             props.load(new FileReader("src/main/resources/application.properties"));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public static ConnectionFactory getInstance() {
@@ -38,7 +39,6 @@ public class ConnectionFactory {
         Connection conn = null;
 
         try {
-
             conn = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("admin-usr"),
@@ -50,7 +50,6 @@ public class ConnectionFactory {
         }
 
         return conn;
-
     }
 
 }

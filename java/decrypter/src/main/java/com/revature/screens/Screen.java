@@ -2,22 +2,21 @@ package com.revature.screens;
 
 public abstract class Screen {
 
-    protected String name;
-    protected String route;
+    protected String Name;
+    protected String Route;
 
     public Screen(String name, String route) {
-        this.name = name;
-        this.route = route;
+        Name = name;
+        Route = route;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public String getRoute() {
-        return route;
+        return Route;
     }
 
     public abstract void render();
-
 }

@@ -4,7 +4,7 @@ import com.revature.repos.UserRepository;
 import com.revature.screens.HomeScreen;
 import com.revature.screens.LoginScreen;
 import com.revature.screens.RegisterScreen;
-import com.revature.services.UserService;
+import com.revature.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,26 +22,20 @@ public class AppState {
 
     public AppState() {
 
-        logger.info("Initializing application");
+        logger.info("Initializing application...");
 
         this.appRunning = true;
         this.console = new BufferedReader(new InputStreamReader(System.in));
 
         final UserRepository userRepo = new UserRepository();
-
         final UserService userService = new UserService(userRepo);
 
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
-              .addScreen(new RegisterScreen(userService))
-              .addScreen(new LoginScreen(userService));
+                .addScreen(new RegisterScreen(userService))
+                .addScreen(new LoginScreen(userService));
 
-        logger.info("Application initialized");
-
-    }
-
-    public BufferedReader getConsole() {
-        return console;
+        logger.info("Application initialization");
     }
 
     public ScreenRouter getRouter() {
@@ -56,11 +50,11 @@ public class AppState {
         this.appRunning = appRunning;
     }
 
-    public Session getCurrentSession() {
-        return currentSession;
+    public BufferedReader getConsole() {
+        return console;
     }
 
-    public void setCurrentSession(Session currentSession) {
+    public void setCurrentSession(Session currentSession){
         this.currentSession = currentSession;
     }
 
@@ -72,4 +66,7 @@ public class AppState {
         return (this.currentSession != null);
     }
 
+    public Session getCurrentSession() {
+        return currentSession;
+    }
 }

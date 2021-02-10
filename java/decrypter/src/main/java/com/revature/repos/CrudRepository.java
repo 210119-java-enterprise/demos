@@ -10,5 +10,4 @@ public interface CrudRepository<T> {
     T findById(int id);
     boolean update(T updatedObj);
     boolean deleteById(int id);
-
 }
