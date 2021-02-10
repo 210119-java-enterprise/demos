@@ -1,0 +1,3 @@
+
+com.revature.models.Person@fa5c0f8d
+Person{id=1, username='ecorpron', password='password', role=DEV}

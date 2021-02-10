@@ -1,0 +1,2 @@
+12:32:54.978 [main] ERROR com.revature.util.ScreenRouter - test error
+12:32:54.978 [main] FATAL com.revature.util.ScreenRouter - Test fatal
