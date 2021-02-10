@@ -1,6 +1,7 @@
 package com.revature.orm.util;
 
 import com.revature.orm.annotations.Column;
+import com.revature.orm.annotations.Entity;
 import com.revature.orm.annotations.Id;
 
 import java.lang.reflect.Field;
@@ -12,11 +13,22 @@ public class Metamodel<T> {
     private Class<T> clazz;
 
     public static <T> Metamodel<T> of(Class<T> clazz) {
+        if (clazz.getAnnotation(Entity.class) == null) {
+            throw new IllegalStateException("Cannot create Metamodel object! Provided class, " + clazz.getName() + "is not annotated with @Entity");
+        }
         return new Metamodel<>(clazz);
     }
 
     public Metamodel(Class<T> clazz) {
         this.clazz = clazz;
+    }
+
+    public String getClassName() {
+        return clazz.getName();
+    }
+
+    public String getSimpleClassName() {
+        return clazz.getSimpleName();
     }
 
     public IdField getPrimaryKey() {
