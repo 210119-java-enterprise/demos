@@ -7,6 +7,9 @@ import java.util.List;
 
 public class Configuration {
 
+    private String dbUrl;
+    private String dbUsername;
+    private String dbPassword;
     private List<Metamodel<Class<?>>> metamodelList;
 
     @SuppressWarnings({ "unchecked" })

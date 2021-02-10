@@ -3,6 +3,7 @@ package com.revature.orm.models;
 import com.revature.orm.annotations.Column;
 import com.revature.orm.annotations.Entity;
 import com.revature.orm.annotations.Id;
+import com.revature.orm.annotations.JoinColumn;
 
 @Entity(tableName = "users")
 public class User {
@@ -18,6 +19,9 @@ public class User {
 
     @Column(columnName = "email_address")
     private String emailAddress;
+
+    @JoinColumn(columnName = "test_relation")
+    private Test testRelation;
 
     public User() {
         super();

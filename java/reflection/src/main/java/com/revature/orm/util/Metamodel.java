@@ -3,14 +3,19 @@ package com.revature.orm.util;
 import com.revature.orm.annotations.Column;
 import com.revature.orm.annotations.Entity;
 import com.revature.orm.annotations.Id;
+import com.revature.orm.annotations.JoinColumn;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Metamodel<T> {
 
     private Class<T> clazz;
+    private IdField primaryKeyField;
+    private List<ColumnField> columnFields;
+    private List<ForeignKeyField> foreignKeyFields;
 
     public static <T> Metamodel<T> of(Class<T> clazz) {
         if (clazz.getAnnotation(Entity.class) == null) {
@@ -21,6 +26,8 @@ public class Metamodel<T> {
 
     public Metamodel(Class<T> clazz) {
         this.clazz = clazz;
+        this.columnFields = new LinkedList<>();
+        this.foreignKeyFields = new LinkedList<>();
     }
 
     public String getClassName() {
@@ -45,7 +52,6 @@ public class Metamodel<T> {
 
     public List<ColumnField> getColumns() {
 
-        List<ColumnField> columnFields = new ArrayList<>();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             Column column = field.getAnnotation(Column.class);
@@ -59,6 +65,21 @@ public class Metamodel<T> {
         }
 
         return columnFields;
+    }
+
+    public List<ForeignKeyField> getForeignKeys() {
+
+        List<ForeignKeyField> foreignKeyFields = new ArrayList<>();
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            JoinColumn column = field.getAnnotation(JoinColumn.class);
+            if (column != null) {
+                foreignKeyFields.add(new ForeignKeyField(field));
+            }
+        }
+
+        return foreignKeyFields;
+
     }
 
 }
