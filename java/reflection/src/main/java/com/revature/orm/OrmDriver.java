@@ -16,10 +16,10 @@ public class OrmDriver {
         IdField idField = userMetamodel.getPrimaryKey();
         List<ColumnField> columnFields = userMetamodel.getColumns();
 
-        System.out.printf("The primary key of User is: %s\n", idField.getName());
+        System.out.printf("The primary key of User is: %s; which maps to the column with the name: %s\n", idField.getName(), idField.getColumnName());
 
         for (ColumnField columnField : columnFields) {
-            System.out.printf("The User class contains a column called: %s\n", columnField.getName());
+            System.out.printf("The User class contains a column called: %s; which maps to the column with the name: %s\n", columnField.getName(), columnField.getColumnName());
         }
 
     }

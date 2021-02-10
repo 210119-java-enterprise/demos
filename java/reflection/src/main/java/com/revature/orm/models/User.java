@@ -5,26 +5,26 @@ import com.revature.orm.annotations.Id;
 
 public class User {
 
-    @Id
+    @Id(columnName = "id")
     private int id;
 
-    @Column
+    @Column(columnName = "first_name")
     private String firstName;
 
-    @Column
+    @Column(columnName = "last_name")
     private String lastName;
 
-    @Column
-    private int age;
+    @Column(columnName = "email_address")
+    private String emailAddress;
 
     public User() {
         super();
     }
 
-    public User(String firstName, String lastName, int age) {
+    public User(String firstName, String lastName, String emailAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.emailAddress = emailAddress;
     }
 
     public int getId() {
@@ -51,12 +51,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
+                ", emailAddress=" + emailAddress +
                 '}';
     }
 
