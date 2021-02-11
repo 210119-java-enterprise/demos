@@ -9,7 +9,11 @@ public class RegisterScreen extends Screen {
 
     private UserService userService;
 
+<<<<<<< HEAD
     public RegisterScreen(UserService userService) {
+=======
+    public RegisterScreen() {
+>>>>>>> 6be55055a9ff40bbdec738bda1bb167169288799
         super("RegisterScreen", "/register");
         this.userService = userService;
     }
