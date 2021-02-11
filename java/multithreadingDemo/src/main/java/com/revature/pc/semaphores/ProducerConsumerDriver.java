@@ -12,16 +12,16 @@ public class ProducerConsumerDriver {
         Consumer consumer = new Consumer(buf, semaphore);
 
         Runnable produceTask = () -> {
-            for (int i = 0; i < 50; i++) {
+            while (true) {
                 producer.produce();
             }
-            System.out.println("Done producing");
+            // System.out.println("Done producing");
         };
         Runnable consumeTask = () -> {
-            for (int i = 0; i < 45; i++) {
+            while (true) {
                 consumer.consume();
             }
-            System.out.println("Done consuming");
+            // System.out.println("Done consuming");
         };
 
         Thread producerThread = new Thread(produceTask);

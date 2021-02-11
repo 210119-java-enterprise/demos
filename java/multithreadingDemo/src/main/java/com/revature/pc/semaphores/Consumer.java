@@ -20,12 +20,14 @@ public class Consumer {
             e1.printStackTrace();
         }
         
-        if (buf.isEmpty()) {
-            System.out.println("Buffer is empty, pausing consumer thread.");
+        while (buf.isEmpty()) {
+            System.out.println("Buffer is full, pausing producer thread.");
             sem.release();
             try {
+                Thread.sleep(10);
                 sem.acquire();
             } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
