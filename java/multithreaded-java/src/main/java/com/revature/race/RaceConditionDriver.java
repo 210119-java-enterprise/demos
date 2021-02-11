@@ -44,7 +44,7 @@ public class RaceConditionDriver {
 
                 - This method of the Thread class can be invoked to place the calling
                   thread into the WAITING state. It will remain in this state until the
-                  reference thread terminates.
+                  referenced thread terminates.
          */
         t1.join();
         t2.join();
