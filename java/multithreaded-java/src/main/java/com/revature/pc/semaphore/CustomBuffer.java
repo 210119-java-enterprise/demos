@@ -1,4 +1,4 @@
-package com.revature.pc;
+package com.revature.pc.semaphore;
 
 public class CustomBuffer {
 
