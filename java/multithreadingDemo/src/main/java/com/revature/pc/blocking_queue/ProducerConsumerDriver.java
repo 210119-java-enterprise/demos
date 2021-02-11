@@ -1,12 +1,14 @@
-package com.revature.pc;
+package com.revature.pc.blocking_queue;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class ProducerConsumerDriver {
     
     public static void main(String[] args) throws InterruptedException {
-        CustomBuffer buf = new CustomBuffer();
-        final Object monitor = new Object();
-        Producer producer = new Producer(buf, monitor);
-        Consumer consumer = new Consumer(buf, monitor);
+        BlockingQueue<Integer> blockingQueue = new LinkedBlockingDeque<>(10);
+        Producer producer = new Producer(blockingQueue);
+        Consumer consumer = new Consumer(blockingQueue);
 
         Runnable produceTask = () -> {
             for (int i = 0; i < 50; i++) {
@@ -34,6 +36,6 @@ public class ProducerConsumerDriver {
         producerThread.join();
         consumerThread.join();
 
-        System.out.println("Final buffer count: " + buf.getCount());
+        System.out.println("Final buffer count: " + blockingQueue.size());
     }
 }
