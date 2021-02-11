@@ -19,13 +19,13 @@ public class StreamDriver {
         User wezley = new User("Wezley", 30);
         User jay = new User("Jay", 50);
         User greg = new User("Greg", 45);
-        User nobody = new User("", 34);
+        User nobody = new User("Jim", 34);
 
         List<User> users = new ArrayList<>(Arrays.asList(cole, kalyb, daniel, wezley, jay, greg, nobody));
 
         long numberOfEmptyNames = users.stream() // Stream of Users
                                         .map(u -> u.getName()) // Stream of Strings
-                                        .filter(uname -> uname.isEmpty()) // Stream of Strings (filtered)
+                                        .filter(uname -> uname.startsWith("J")) // Stream of Strings (filtered)
                                         .count(); // return a long which represents the number of Strings in the above Stream
 
         System.out.println(numberOfEmptyNames);
