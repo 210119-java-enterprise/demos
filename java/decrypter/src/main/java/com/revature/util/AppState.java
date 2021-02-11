@@ -29,7 +29,7 @@ public class AppState {
         router = new ScreenRouter();
         router.addScreen(new HomeScreen())
               .addScreen(new RegisterScreen(userService))
-              .addScreen(new LoginScreen());
+              .addScreen(new LoginScreen(userService));
 
         System.out.println("[LOG] - Application initialized");
 

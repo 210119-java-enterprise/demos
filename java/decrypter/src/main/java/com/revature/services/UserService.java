@@ -29,6 +29,15 @@ public class UserService {
 
     }
 
+    public AppUser login(String userName, String passWord){
+        if (userName == null || userName.trim().equals("") || passWord == null || passWord.trim().equals("")) {
+            throw new InvalidRequestException("Invalid credentials provided (null or empty strings)!");
+        }
+        
+        return userRepo.checkForLogin(userName, passWord);
+
+    }
+
     public boolean isUserValid(AppUser user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;

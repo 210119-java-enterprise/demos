@@ -17,7 +17,7 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM app_users WHERE username = ?";
+            String sql = "SELECT * FROM app_users WHERE user_name = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
 
@@ -28,7 +28,7 @@ public class UserRepository implements CrudRepository<AppUser>{
                 user.setId(rs.getInt("user_id"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
-                user.setUsername(rs.getString("username"));
+                user.setUsername(rs.getString("user_name"));
                 user.setPassword(rs.getString("password"));
             }
 
@@ -45,7 +45,7 @@ public class UserRepository implements CrudRepository<AppUser>{
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO app_users (username, password, first_name, last_name, role_id) " +
+            String sql = "INSERT INTO app_users (user_name, password, first_name, last_name, role_id) " +
                          "VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
@@ -68,6 +68,33 @@ public class UserRepository implements CrudRepository<AppUser>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public AppUser checkForLogin(String userName, String passWord){
+        AppUser user = null;
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "SELECT * FROM app_users WHERE user_name = ? and password = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"user_id"});
+            pstmt.setString(1, userName);
+            pstmt.setString(2, passWord);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                user = new AppUser();
+                user.setId(rs.getInt("user_id"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setUsername(rs.getString("user_name"));
+                user.setPassword(rs.getString("password"));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
