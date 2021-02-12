@@ -10,12 +10,10 @@ public class Producer {
     }
 
     public void produce(int value) {
-
         buffer.getBufferArray()[buffer.getCount()] = value;
         buffer.incrementCount();
         System.out.println("\tProduced new value: " + value);
         System.out.println("\tArray contents: " + buffer.printBufferContents());
-
     }
 
     public void setDoneProducing(boolean isDone) {

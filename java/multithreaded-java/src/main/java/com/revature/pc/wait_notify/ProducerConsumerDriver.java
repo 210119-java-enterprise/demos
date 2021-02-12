@@ -1,4 +1,4 @@
-package com.revature.pc;
+package com.revature.pc.wait_notify;
 
 public class ProducerConsumerDriver {
 
