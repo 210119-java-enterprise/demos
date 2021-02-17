@@ -19,7 +19,7 @@ public class ProducerConsumerDriver {
         };
 
         Runnable consumeTask = () -> {
-            while (!producer.isDoneProducing().get()) {
+            while (!producer.isDoneProducing().get() || !buffer.isEmpty()) {
                 System.out.println("Attempting to consume new value...");
                 consumer.consume();
             }

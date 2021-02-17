@@ -13,7 +13,7 @@ public class ProducerConsumerDriver {
         Consumer consumer = new Consumer(buffer);
 
         Runnable produceTask = () -> {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 2; i++) {
                 System.out.println("Attempting to produce new value: " + i);
                 try {
                     semaphore.acquire();

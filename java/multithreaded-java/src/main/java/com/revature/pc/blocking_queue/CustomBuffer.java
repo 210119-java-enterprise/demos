@@ -19,10 +19,6 @@ public class CustomBuffer {
         return bufferQueue.isEmpty();
     }
 
-    public boolean isFull() {
-        return bufferQueue.size() == 10;
-    }
-
     public String printBufferContents() {
         return bufferQueue.toString();
     }
