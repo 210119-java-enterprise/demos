@@ -1,0 +1,6 @@
+target/
+*.class
+*.properties
+*.war
+*.jar
+*.ear
