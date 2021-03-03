@@ -28,8 +28,8 @@ public class ProducerConsumerDriver {
         Thread consumerThread = new Thread(consumeTask);
 
         // 0 - 10 (0 being the lowest, 10 being the highest, and 5 being the default)
-        producerThread.setPriority(8);
-        consumerThread.setPriority(2);
+//        producerThread.setPriority(8);
+//        consumerThread.setPriority(2);
 
         producerThread.start();
         consumerThread.start();
