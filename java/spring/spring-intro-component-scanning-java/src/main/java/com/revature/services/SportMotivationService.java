@@ -2,7 +2,7 @@ package com.revature.services;
 
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("sportMotivate")
 public class SportMotivationService implements MotivationService {
 
     @Override

@@ -4,7 +4,6 @@ import com.revature.config.AppConfig;
 import com.revature.models.Coach;
 import com.revature.models.FootballCoach;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringDriver {
 

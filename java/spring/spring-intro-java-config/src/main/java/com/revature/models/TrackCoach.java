@@ -7,7 +7,7 @@ public class TrackCoach implements Coach {
     private MotivationService motivationService;
 
     public TrackCoach(MotivationService motivationService) {
-        System.out.println("TrackCoach no-args constructor invoked!");
+        System.out.println("TrackCoach constructor invoked!");
         this.motivationService = motivationService;
     }
 

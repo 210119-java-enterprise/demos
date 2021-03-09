@@ -11,7 +11,7 @@ public class BaseballCoach implements Coach {
 
     // Constructor-based dependency injection (Spring recommends this for MANDATORY dependencies)
     public BaseballCoach(MotivationService motivationService) {
-        System.out.println("BaseballCoach no-args constructor invoked!");
+        System.out.println("BaseballCoach constructor invoked!");
         this.motivationService = motivationService;
     }
 

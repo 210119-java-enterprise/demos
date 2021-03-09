@@ -1,10 +1,14 @@
 package com.revature.models;
 
 import com.revature.services.MotivationService;
+import org.springframework.beans.factory.annotation.Value;
 
 public class FootballCoach implements Coach {
 
+    @Value("${coach.email}")
     private String email;
+
+    @Value("The Cafebabes")
     private String teamName;
 
     private MotivationService motivationService;

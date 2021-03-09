@@ -44,9 +44,9 @@ public class FootballCoach implements Coach {
     }
 
     @Autowired
-    public void setMotivationService(MotivationService sportMotivationService) {
+    public void setMotivationService(MotivationService sportMotivate) {
         System.out.println("FootballCoach.setMotivationService() invoked!");
-        this.motivationService = sportMotivationService;
+        this.motivationService = sportMotivate;
     }
 
     @PostConstruct
