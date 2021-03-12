@@ -141,12 +141,17 @@ let getQuestions = (async function() {
             console.log('questions already fetched. not doing it again...');
             return myQuestions;
         } else {
-            console.log('fetching questions for the first time!')
-            // you CANNOT use the 'await' keyword outside of an async function
-            let response = await fetch('http://quizzardapi-env-1.eba-3m7rumy3.us-east-1.elasticbeanstalk.com/questions');
-            myQuestions = await response.json();
-            console.log(myQuestions);
-            return myQuestions;
+
+            try {
+                console.log('fetching questions for the first time!')
+                // you CANNOT use the 'await' keyword outside of an async function
+                let response = await fetch('http://quizzardapi-env-1.eba-3m7rumy3.us-east-1.elasticbeanstalk.com/questions');
+                myQuestions = await response.json();
+                console.log(myQuestions);
+                return myQuestions;
+            } catch {
+                console.error('Could not retrieve data from API!');
+            }
         }
     }
 
