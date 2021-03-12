@@ -32,8 +32,11 @@ window.onload = () => {
     
 };
 
-function buildQuiz() {
+async function buildQuiz() {
     console.log('building quiz...');
+
+    let questionPromise = await getQuestions;
+    let questions = await questionPromise();
     
     // Convenience reference for our quiz div
     let quizContainer = document.getElementById('quiz');
@@ -42,17 +45,17 @@ function buildQuiz() {
     const output = [];
 
     // Loop through questions to build HTML for each question
-    quizQuestions.forEach((currentQuestion, questionNumber) => {
+    questions.forEach((currentQuestion, questionNumber) => {
 
         // create an array for storing this question's answers
         const answers = [];
 
         // for each answer in this question create a label for it and add it to the answers array
-        for (let letter in currentQuestion.answers) {
+        for (let letter in currentQuestion['questionAnswers']) {
             answers.push(`
             <label>
                 <input type="radio" name="question-${questionNumber}" value="${letter}"/>
-                ${letter}: ${currentQuestion.answers[letter]}
+                ${letter.charAt(letter.length - 1).toLowerCase()}: ${currentQuestion['questionAnswers'][letter]}
             </label>
             <br/>
             `);
@@ -61,7 +64,7 @@ function buildQuiz() {
         // add this question and its answers to the output array
         output.push(`
         <br/>
-        <div class="question">${currentQuestion.question}</div>
+        <div class="question">${currentQuestion['questionText']}</div>
         <div class="answers">${answers.join('')}</div>
         `);
 
@@ -74,6 +77,7 @@ function buildQuiz() {
 
 function isQuizValid() {
     console.log('validating quiz...');
+
     
     let submitBtn = document.getElementById('submit');
     let selectedAnswers = document.querySelectorAll('div.answers > label > input[name^="question-"]:checked');
@@ -86,7 +90,10 @@ function isQuizValid() {
     }
 }
 
-function showResults() {
+async function showResults() {
+
+    let questionPromise = await getQuestions;
+    let questions = await questionPromise();
     
     // Convenience reference for our resultsContainer
     let resultsContainer = document.getElementById('results');
@@ -98,11 +105,12 @@ function showResults() {
     let numCorrect = 0;
 
     // For each question in quizQuestions
-    quizQuestions.forEach((currentQuestion, questionNumber) => {
+    questions.forEach((currentQuestion, questionNumber) => {
 
-        console.log(selectedAnswers);
         let userAnswerLabel = ((selectedAnswers[questionNumber] || {}).parentElement || {});
-        let userAnswer = (selectedAnswers[questionNumber] || {}).value;
+        let userAnswerUnmod = (selectedAnswers[questionNumber] || {}).value;
+        let userAnswer = userAnswerUnmod.charAt(userAnswerUnmod.length - 1).toLowerCase();
+
 
         // style user selections based on correctness
         if(userAnswer === currentQuestion.correctAnswer) {
@@ -115,62 +123,46 @@ function showResults() {
     });
 
     // Calculate the user's score
-    let userScore = ((numCorrect / quizQuestions.length) * 100).toFixed(2);
+    let userScore = ((numCorrect / questions.length) * 100).toFixed(2);
 
     // Display the calculated score onto the page
-    resultsContainer.innerText = `${numCorrect} correct out of ${quizQuestions.length} (${userScore})`;
+    resultsContainer.innerText = `${numCorrect} correct out of ${questions.length} (${userScore})`;
     
 }
 
-let quizQuestions = [
-    {
-        question: 'Which of the following is NOT a falsy value',
-        answers: {
-            a: '{}',
-            b: '0',
-            c: '""',
-            d: 'NaN'
-        },
-        correctAnswer: 'a'
-    },
-    {
-        question: '7 + 7 + "7" = ?',
-        answers: {
-            a: 147,
-            b: 21,
-            c: '"777"',
-            d: '"147"'
-        },
-        correctAnswer: 'd'
-    },
-    {
-        question: 'NaN == NaN',
-        answers: {
-            a: 'true',
-            b: 'false',
-            c: 'undefined',
-            d: 'SyntaxError'
-        },
-        correctAnswer: 'b'
-    },
-    {
-        question: '!!{}',
-        answers: {
-            a: 'true',
-            b: 'false',
-            c: '{}',
-            d: 'SyntaxError'
-        },
-        correctAnswer: 'a'
-    },
-    {
-        question: 'Which of the following declarative keywords are subject to hoisting?',
-        answers: {
-            a: 'let',
-            b: 'const',
-            c: 'var',
-            d: '(no keywords used)'
-        },
-        correctAnswer: 'c'
+let getQuestions = (async function() {
+
+    let myQuestions;
+
+    // using a closure to eliminate the need for a global variable 
+    // and for passing questions around as a parameter everywhere
+    return async function() {
+        if(myQuestions) {
+            console.log('questions already fetched. not doing it again...');
+            return myQuestions;
+        } else {
+            console.log('fetching questions for the first time!')
+            // you CANNOT use the 'await' keyword outside of an async function
+            let response = await fetch('http://quizzardapi-env-1.eba-3m7rumy3.us-east-1.elasticbeanstalk.com/questions');
+            myQuestions = await response.json();
+            console.log(myQuestions);
+            return myQuestions;
+        }
     }
-];
+
+})();
+
+// AJAX implementation
+// function retrieveQuestions() {
+    
+//     console.log('fetching quiz questions...');
+//     let xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'http://quizzardapi-env-1.eba-3m7rumy3.us-east-1.elasticbeanstalk.com/questions');
+//     xhr.send();
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === 4 && xhr.status === 200) {
+//             quizQuestions = JSON.parse(xhr.responseText);
+//             buildQuiz();
+//         }
+//     }
+// }
