@@ -1,3 +1,4 @@
 export const state = {
-    currentUser: null
+    currentUser: null,
+    token: null
 }

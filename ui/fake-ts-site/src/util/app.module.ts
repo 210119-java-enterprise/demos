@@ -14,12 +14,12 @@ export class AppModule {
 
         this.services = {
             router: new Router(),
-            user: new UserService()
+            user: new UserService(),
         }
 
         this.components = {
             login: new LoginComponent(this.services['user'], this.services['router']),
-            dashboard: new DashboardComponent()
+            dashboard: new DashboardComponent(this.services['user'])
         }
 
         let routes = [
