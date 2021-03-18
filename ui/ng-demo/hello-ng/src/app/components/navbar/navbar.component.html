@@ -12,8 +12,13 @@
             </li>
             <li ngbDropdown class="nav-item dropdown">
                 <span ngbDropdownToggle class="nav-link dropdown-toggle" id="nav-dropdown">Views</span>
-                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="nav-dropdown">
-                    <a class="dropdown-item" *ngFor="let link of links" [routerLink]="link.linkPath">
+                <div *ngIf="!currentUser" ngbDropdownMenu class="dropdown-menu" aria-labelledby="nav-dropdown">
+                    <a class="dropdown-item" *ngFor="let link of publicLinks" [routerLink]="link.linkPath">
+                        {{ link.linkName }}
+                    </a>
+                </div>
+                <div *ngIf="currentUser" ngbDropdownMenu class="dropdown-menu" aria-labelledby="nav-dropdown">
+                    <a class="dropdown-item" *ngFor="let link of authLinks" [routerLink]="link.linkPath">
                         {{ link.linkName }}
                     </a>
                 </div>

@@ -33,22 +33,4 @@ export class UserService {
     return this.users.filter(u => u.getUsername() == username).pop() as User;
   }
 
-  authenticateUser(un: string, pw: string): Promise<User> {
-    
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        let authUser = this.users.filter(u => u.getUsername() == un && u.getPassword() == pw).pop() as User;
-        if (authUser) {
-          resolve(authUser);
-        } else {
-          reject('No user found with provided credentials!');
-        }
-      }, 2000);
-      
-    });
-
-
-  
-  }
-
 }

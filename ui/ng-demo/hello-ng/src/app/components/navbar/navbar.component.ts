@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Principal } from 'src/app/models/principal';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  links = [
+  currentUser: Principal | null;
+  private currentUserSub: Subscription | null;
+
+  authLinks = [
     {
       linkName: 'Structural Directives Demo',
       linkPath: '/structural'
@@ -17,18 +23,27 @@ export class NavbarComponent implements OnInit {
       linkPath: '/attribute'
     },
     {
-      linkName: 'Login',
-      linkPath: '/login'
-    },
-    {
       linkName: 'Dashboard',
       linkPath: '/dashboard'
     }
   ]
 
-  constructor() { }
+  publicLinks = [
+    {
+      linkName: 'Login',
+      linkPath: '/login'
+    }
+  ];
+
+  constructor(private authService: AuthService) {
+    this.currentUser = null;
+    this.currentUserSub = null;
+  }
 
   ngOnInit(): void {
+    this.currentUserSub = this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user as Principal;
+    });
   }
 
 }

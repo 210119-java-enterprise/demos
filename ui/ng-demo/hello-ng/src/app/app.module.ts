@@ -11,6 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   // components, directives, and pipes declared within this module
@@ -29,7 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule, // home of the ngModel attribute (for two-way data binding)
     ReactiveFormsModule,
-    NgbModule
+    NgbModule, 
+    HttpClientModule
   ],
 
   // a subset of declarations that can be made visible to other modules

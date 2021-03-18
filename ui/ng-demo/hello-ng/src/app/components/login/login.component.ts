@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'login',
@@ -16,7 +16,7 @@ export class LoginComponent {
   loginSuccess = false;
 
   constructor(private formBuilder: FormBuilder, 
-              private userService: UserService, 
+              private authService: AuthService, 
               private router: Router) {
     console.log('LoginComponent constructor was invoked!');
 
@@ -44,18 +44,22 @@ export class LoginComponent {
 
     this.loading = true;
 
+    this.submitted = true;
+    let un = this.formFields.username.value;
+    let pw = this.formFields.password.value;
+
+    console.log('in loginComponent.login', un, pw);
+
     try {
-      this.submitted = true;
-      let user = await this.userService.authenticateUser(this.formFields.username.value, this.formFields.password.value);
-      this.loginSuccess = true;
+      await this.authService.authenticateUser(un, pw);
       this.loading = false;
       this.router.navigate(['/dashboard']);
-    } catch (err) {
-      this.submitted = false;
-      this.loginSuccess = false;
-      console.error(err);
+    } catch (e) {
+      console.log('Login failed!');
+      console.error(e);
+      this.loading = false;
     }
-
+  
   }
 
 }
