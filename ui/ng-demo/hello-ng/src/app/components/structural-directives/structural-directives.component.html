@@ -1,0 +1,43 @@
+<h3>ngIf Demo</h3>
+<div *ngIf="myCondition">Condition met</div>
+<div *ngIf="!myCondition">Condition not met</div>
+<button (click)="changeCondition()">Change condition</button>
+
+<hr/>
+
+<h3>ngFor Demo</h3>
+<h4>People</h4>
+<ul>
+    <li *ngFor="let person of people">{{ person }}</li>
+</ul>
+
+<hr/>
+
+<h4>Monsters</h4>
+<ul>
+    <li *ngFor="let monster of monsters; let i = index">
+        {{ i }} - {{ monster.name }}: {{ monster.location }}
+        <strong *ngIf="monster.name == 'Godzilla'; else notGodzilla">GODZILLA!</strong>
+        <ng-template #notGodzilla><em>Not Godzilla</em></ng-template>
+    </li>
+</ul>
+
+<hr/>
+
+<h3>ngSwitch Demo</h3>
+<h3>Is it day or night?</h3>
+<div [ngSwitch]="time">
+    <span *ngSwitchCase="'night'">
+        It's night time!
+        <button (click)="changeTimeOfDay('day')">Change to Day</button>
+    </span>
+    <span *ngSwitchCase="'day'">
+        It's day time!
+        <button (click)="changeTimeOfDay('night')">Change to Night</button>
+    </span>
+    <span *ngSwitchDefault>
+        I don't know what time it is, there aren't any windows in this room.
+        <button (click)="changeTimeOfDay('day')">Change to Day</button>
+        <button (click)="changeTimeOfDay('night')">Change to Night</button>
+    </span>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+    <span>Name:</span>
+    <input type="checkbox" (click)="enabler()"/>
+
+    <br/>
+
+    <!-- 
+        To use the ngModel directive, you must include the FormsModule within the
+        imports array of the Angular module that this component is declared within.
+    -->
+    <select [disabled]="isDisabled" [(ngModel)]="selectedColor">
+        <option *ngFor="let color of colors">{{ color }}</option>
+    </select>
+
+    <br/>
+    <br/>
+
+    <span>Classes:</span>
+    <select multiple (change)="addClasses($event)">
+        <option *ngFor="let class of classes" [value]="class.className">
+            {{ class.displayName }}
+        </option>
+    </select>
+</div>
+
+<br/><br/>
+
+<div class="container">
+    <span [ngClass]="selectedClasses.join(' ')"
+          [ngStyle]="{'color': selectedColor}">
+        Name: {{ name }}
+    </span>
+    <br/><br/>
+</div>
