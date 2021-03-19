@@ -11,8 +11,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
+import { HttpInterceptService } from './services/http-intercept.service';
 
 @NgModule({
   // components, directives, and pipes declared within this module
@@ -42,7 +43,13 @@ import { RegisterComponent } from './components/register/register.component';
   ],
 
   // you can optionally declare services used within this module here
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptService,
+      multi: true
+    }
+  ],
   
   // defines a root component, which hosts all other app views
   // only included within the root module of your NG app

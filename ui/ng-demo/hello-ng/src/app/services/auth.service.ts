@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
@@ -12,6 +12,7 @@ export class AuthService {
 
   private currentUserSubject: BehaviorSubject<Principal | null>;
   currentUser$: Observable<Principal | null>;
+  private token: string | null = null;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<Principal | null>(null);
@@ -20,6 +21,10 @@ export class AuthService {
 
   get currentUserValue() {
     return this.currentUserSubject.value;
+  }
+
+  getToken(): string | null {
+    return this.token;
   }
 
   authenticateUser(username: string, password: string): Promise<Principal> {
@@ -31,6 +36,8 @@ export class AuthService {
       observe: 'response'
     }).pipe(
       map(resp => {
+        this.token = resp.headers.get('quizzard-token');
+        // console.log(`token: ${this.token}`);
         let principal = resp.body as Principal;
         this.currentUserSubject.next(principal);
         return principal;
