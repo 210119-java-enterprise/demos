@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AttributeDirectivesComponent } from './components/attribute-directives/attribute-directives.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { StructuralDirectivesComponent } from './components/structural-directives/structural-directives.component';
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'structural', component: StructuralDirectivesComponent},
-  {path: 'attribute', component: AttributeDirectivesComponent}
+  {path: 'attribute', component: AttributeDirectivesComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

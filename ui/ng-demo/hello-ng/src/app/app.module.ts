@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   // components, directives, and pipes declared within this module
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     AttributeDirectivesComponent,
     LoginComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterComponent
   ],
   // other modules which contain members we wish to use within members of this module
   imports: [

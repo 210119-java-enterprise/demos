@@ -1,16 +1,15 @@
 package com.revature.model;
 
-import com.revature.annotations.Ignore;
-import com.revature.annotations.NotNull;
-
 import java.util.List;
 import java.util.Objects;
 
-public class User {
+import com.revature.annotations.Ignore;
+import com.revature.annotations.NotNull;
 
-    private int id;
+public class User {
     private String username;
-    private transient String password;
+    private String password;
+    private int id;
     private List<String> features;
 
     public User() {

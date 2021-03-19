@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>RestaurantApp</display-name>
+
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error.html</location>
+  </error-page>
+
+  <servlet>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <servlet-class>com.revature.servlet.RestaurantWelcomeServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>WelcomeServlet</servlet-name>
+    <url-pattern>/welcome</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MenuServlet</servlet-name>
+    <servlet-class>com.revature.servlet.MenuServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MenuServlet</servlet-name>
+    <url-pattern>/menu</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ReservationServlet</servlet-name>
+    <servlet-class>com.revature.servlet.ReservationServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ReservationServlet</servlet-name>
+    <url-pattern>/reservation</url-pattern>
+  </servlet-mapping>
+</web-app>
