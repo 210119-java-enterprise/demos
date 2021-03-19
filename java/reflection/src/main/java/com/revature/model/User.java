@@ -1,6 +1,7 @@
 package com.revature.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.revature.annotations.Ignore;
 import com.revature.annotations.NotNull;

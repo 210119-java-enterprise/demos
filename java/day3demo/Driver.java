@@ -1,4 +1,4 @@
-package com.revature.java.day3demo;
+package day3demo;
 import java.util.regex.*;
 
 public class Driver {

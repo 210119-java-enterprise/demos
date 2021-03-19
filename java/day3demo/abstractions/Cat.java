@@ -1,4 +1,4 @@
-package com.revature.java.day3demo.abstractions;
+package day3demo.abstractions;
 
 public class Cat extends Animal {
     
