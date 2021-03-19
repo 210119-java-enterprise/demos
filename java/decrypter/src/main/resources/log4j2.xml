@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="WARN">
+    <Appenders>
+
+        <!-- Console Appender -->
+        <Console name="stdout" target="SYSTEM_OUT">
+            <!-- Pattern of log messages for the console appender -->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- File Appender -->
+        <File name="info_fileout" fileName="src/main/resources/info_log.txt" append="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="trace_fileout" fileName="src/main/resources/trace_log.txt" append="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="error_fileout" fileName="src/main/resources/error_log.txt" append="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="ALL">
+            <AppenderRef ref="stdout"/>
+        </Root>
+
+        <Logger name="com.revature" level="ALL">
+            <AppenderRef ref="error_fileout" level="ERROR"/>
+            <AppenderRef ref="info_fileout" level="INFO"/>
+            <AppenderRef ref="trace_fileout" level="TRACE"/>
+        </Logger>
+
+    </Loggers>
+
+</Configuration>

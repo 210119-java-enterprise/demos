@@ -1,32 +1,46 @@
 package com.revature;
 
+import com.revature.model.User;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import com.revature.model.User;
+import java.util.Arrays;
 
 public class ClassCreator {
 
-    public static void main(String[] args)
-            throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Constructor<?> noArgConstructor = null;
+    public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+
         User u = null;
+        Constructor<?> noArgConstructor = null;
         Constructor<?>[] constructors = User.class.getConstructors();
-        for (Constructor<?> constructor : constructors) {
-            System.out.println(constructor.getName() + " " + constructor.getParameterCount());
-            if (constructor.getParameterCount() == 0) {
-                noArgConstructor = constructor;
-                u = (User) noArgConstructor.newInstance();
-                System.out.println(u.toString());
-                u.setId(10);
-                u.setUsername("ngamble");
-                u.setPassword("password");
-                System.out.println(u.toString());
-            } else {
-                u = (User) constructor.newInstance(1, "lburroughs", "pass123");
-                System.out.println(u.toString());
-            }
-        }
+
+        u = (User) Arrays.stream(constructors)
+                        .filter(c -> c.getParameterTypes().length == 0)
+                        .findFirst()
+                        .orElseThrow(RuntimeException::new)
+                        .newInstance();
+
+        u.setId(10);
+        u.setUsername("wsingleton");
+        u.setPassword("password");
+        System.out.println(u);
+
+
+//        for (Constructor<?> constructor : constructors) {
+//            if (constructor.getParameterTypes().length == 0) {
+//                noArgConstructor = constructor;
+//                u = (User) noArgConstructor.newInstance();
+//                System.out.println(u);
+//                u.setId(10);
+//                u.setUsername("wsingleton");
+//                u.setPassword("password");
+//                System.out.println(u);
+//            } else {
+//                u = (User) constructor.newInstance(1, "athompson", "p4ssw0rd", new ArrayList<>());
+//                System.out.println(u);
+//            }
+//
+//        }
 
     }
 }

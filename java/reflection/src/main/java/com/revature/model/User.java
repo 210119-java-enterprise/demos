@@ -15,13 +15,22 @@ public class User {
         super();
     }
 
-    private User(int id) {
+    protected User(int id) {
         this.id = id;
     }
 
-    public User(int id, String username, String password) {
+    public User(int id, String username, String password, List<String> features) {
+        this.id = id;
         this.username = username;
         this.password = password;
+        this.features = features;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,14 +51,6 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public List<String> getFeatures() {
         return features;
     }
@@ -58,50 +59,30 @@ public class User {
         this.features = features;
     }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((features == null) ? 0 : features.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(features, user.features);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (features == null) {
-			if (other.features != null)
-				return false;
-		} else if (!features.equals(other.features))
-			return false;
-		if (id != other.id)
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, features);
+    }
 
     @Override
     public String toString() {
-        return "User [features=" + features + ", id=" + id + ", password=" + password + ", username=" + username + "]";
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", features=" + features +
+                '}';
     }
 
-    
 }
