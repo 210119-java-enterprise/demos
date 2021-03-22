@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" class="form-control" formControlName="username"/>
-            <div *ngIf="submitted && formFields.username.errors">
+            <div id="username-required-warning" *ngIf="submitted && formFields.username.errors">
                 <p class="alert alert-danger">Username is required</p>
             </div>
         </div>
@@ -11,17 +11,17 @@
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" formControlName="password"/>
-            <div *ngIf="submitted && formFields.password.errors">
+            <div id="password-required-warning" *ngIf="submitted && formFields.password.errors">
                 <p class="alert alert-danger">Password is required!</p>
             </div>
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary" [disabled]="loading">Login</button>
+            <button id="login-button" class="btn btn-primary" [disabled]="loading">Login</button>
             <img src="assets/loading-star.gif" id="loading-img" *ngIf="loading">
         </div>
 
-        <div *ngIf="submitted && !loginSuccess">
+        <div id="invalid-credentials-warning" *ngIf="submitted && !loginSuccess">
             <p class="alert alert-danger">Invalid credentials provided!</p>
         </div>
     </form>

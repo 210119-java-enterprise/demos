@@ -36,27 +36,24 @@ export class LoginComponent {
 
   login = async () => {
 
-    if (this.loginForm.invalid) { 
+    if (this.loginForm.invalid) {
+      this.submitted = true;
       console.log('The form is invalid!');
-      console.log(this.formFields.username.errors)
       return; 
     }
 
     this.loading = true;
 
-    this.submitted = true;
+    
     let un = this.formFields.username.value;
     let pw = this.formFields.password.value;
-
-    console.log('in loginComponent.login', un, pw);
 
     try {
       await this.authService.authenticateUser(un, pw);
       this.loading = false;
+      console.log('test')
       this.router.navigate(['/dashboard']);
     } catch (e) {
-      console.log('Login failed!');
-      console.error(e);
       this.loading = false;
     }
   
