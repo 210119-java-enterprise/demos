@@ -8,15 +8,17 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Ignore {
+    
+    
 }
 
 /*
+    Retention policies
+        - Source (annotation accessible during compilation)
+        - Class (annotation accessible during class loading)
+        - Runtime (annotation accessible during runtime)
+            - used the most in ORM
+    
     Target
- */
-
-/*
-    Retention Policies:
-        - SOURCE: the annotation is accessible during compilation
-        - CLASS: the annotation is accessible during class loading
-        - RUNTIME: the annotation is accessible at runtime
- */
+        - Tells when annotation is valid to be used
+*/
