@@ -18,11 +18,17 @@
 
         <div class="form-group">
             <button id="login-button" class="btn btn-primary" [disabled]="loading">Login</button>
-            <img src="assets/loading-star.gif" id="loading-img" *ngIf="loading">
+            <img [src]="loadingGifPath" id="loading-img" *ngIf="loading">
+            <!-- <img src="{{loadingGifPath}}" id="loading-img" *ngIf="loading"> -->
         </div>
 
         <div id="invalid-credentials-warning" *ngIf="submitted && !loginSuccess">
             <p class="alert alert-danger">Invalid credentials provided!</p>
         </div>
     </form>
+
+    <p [textContent]="title"></p>
+    <p [attr.textContent]="title"></p> <!-- doesn't work, no attribute on p tags called "textContent"-->
+    <p textContent="{{title}}"></p>
+    <p>{{title}}</p>
 </div>

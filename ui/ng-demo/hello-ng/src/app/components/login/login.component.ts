@@ -14,6 +14,15 @@ export class LoginComponent {
   loading = false;
   submitted = false;
   loginSuccess = false;
+  loadingGifPath = 'assets/loading-star.gif';
+  title = 'test';
+  someUser = {
+    username: 'bill',
+    password: 'password',
+    doThing: () => {
+      console.log('did the thing')
+    }
+  }
 
   constructor(private formBuilder: FormBuilder, 
               private authService: AuthService, 
@@ -51,7 +60,6 @@ export class LoginComponent {
     try {
       await this.authService.authenticateUser(un, pw);
       this.loading = false;
-      console.log('test')
       this.router.navigate(['/dashboard']);
     } catch (e) {
       this.loading = false;

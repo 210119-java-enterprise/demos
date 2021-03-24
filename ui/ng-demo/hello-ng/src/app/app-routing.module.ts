@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StructuralDirectivesComponent } from './components/structural-directives/structural-directives.component';
+import { PipeExampleComponent } from './pipe-example/pipe-example.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'structural', component: StructuralDirectivesComponent},
   {path: 'attribute', component: AttributeDirectivesComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'pipes', component: PipeExampleComponent}
 ];
 
 @NgModule({

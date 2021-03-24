@@ -1,0 +1,28 @@
+<h2>Pure and Impure Pipes</h2>
+
+<h3>Example Objects</h3>
+<div>
+    First Name: <input type="text" [(ngModel)]="examplePerson.firstName"/>
+    <br>
+    Last Name: <input type="text" [(ngModel)]="examplePerson.lastName"/>
+    <br>
+    <button (click)="changeToDefault()">Default Person!</button>
+</div>
+
+<br><br>
+
+<div>
+    Values using PureJsonPipe (pure):
+    {{ examplePerson | pureJson }}
+
+    <hr>
+
+    Values using JsonPipe - provided by NG (impure)
+    {{ examplePerson | json }}
+</div>
+
+Time: <input #newTimeField type="text" ([ngModel])="time">
+<br>
+<button (click)="updateTime(+newTimeField.value)">Update Time</button>
+<br>
+{{ time | date:'short'}}

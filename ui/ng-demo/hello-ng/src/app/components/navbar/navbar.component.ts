@@ -36,6 +36,10 @@ export class NavbarComponent implements OnInit {
     {
       linkName: 'Register',
       linkPath: '/register'
+    },
+    {
+      linkName: 'Pipes',
+      linkPath: '/pipes'
     }
   ];
 

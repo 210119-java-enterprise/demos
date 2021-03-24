@@ -13,6 +13,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
+import { PureJsonPipe } from './pure-json.pipe';
+import { PipeExampleComponent } from './pipe-example/pipe-example.component';
 
 @NgModule({
   // components, directives, and pipes declared within this module
@@ -24,7 +26,9 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    RegisterComponent
+    RegisterComponent,
+    PureJsonPipe,
+    PipeExampleComponent
   ],
   // other modules which contain members we wish to use within members of this module
   imports: [
